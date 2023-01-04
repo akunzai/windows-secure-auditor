@@ -1,24 +1,24 @@
-# Example
+# 範例
 
-## Translations
+## 翻譯
 
-- [繁體中文](./README.zh-TW.md)
+- [English](./README.md)
 
-## Scheduling daily mailing of security audit reports
+## 排程每日寄出資安稭查報表
 
-> Following scheduled task can be found in `Windows Task scheduler` under `/` folder
+> 下列排程可在 `Windows 工作排程器` 的根目錄找到
 
 ```powershell
-# Create the task script from template
+# 自範本建立工作腳本
 Copy-Item ./SecureAuditor-Task.Template.ps1 -Destination ./SecureAuditor-Task.ps1
 
-# Modify the task script as you need
+# 依需求修改工作腳本
 notepad ./SecureAuditor-Task.ps1
 
-# Test the task script
+# 測試工作腳本
 ./SecureAuditor-Task.ps1
 
-# Set up a daily schedule to execute the task script
+# 設置每日排程以執行工作腳本
 $pwsh = if (Get-Command 'pwsh.exe' -ErrorAction SilentlyContinue) { 'pwsh.exe' } else { 'powershell.exe' }
 $taskPath = Resolve-Path ./SecureAuditor-Task.ps1
 Register-ScheduledTask -TaskName SecureAuditor `
