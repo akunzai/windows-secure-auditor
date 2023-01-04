@@ -1,7 +1,5 @@
 param (
   [Parameter(Mandatory)]
-  [string]$AuditorPath,
-  [Parameter(Mandatory)]
   [string]$From,
   [Parameter(Mandatory)]
   [string[]]$To,
@@ -20,7 +18,8 @@ if ($env:SENDGRID_API_KEY) {
 }
 
 $subject = "Secure Audit Report for $env:COMPUTERNAME"
-$body = & $AuditorPath | Out-String
+$auditorPath = [IO.Path]::Combine($PSScriptRoot, '../SecureAuditor.ps1')
+$body = & $auditorPath | Out-String
 
 if ($UseSmtp) {
   $password = $ApiKey | ConvertTo-SecureString -AsPlainText -Force

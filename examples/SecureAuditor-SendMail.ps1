@@ -1,7 +1,5 @@
 param (
 	[Parameter(Mandatory)]
-	[string]$AuditorPath,
-	[Parameter(Mandatory)]
 	[string]$From,
 	[Parameter(Mandatory)]
 	[string[]]$To,
@@ -19,7 +17,8 @@ if ($PSVersionTable.PSVersion.Major -lt 6) {
 }
 
 $subject = "Secure Audit Report for $env:COMPUTERNAME"
-$body = & $AuditorPath | Out-String
+$auditorPath = [IO.Path]::Combine($PSScriptRoot, '../SecureAuditor.ps1')
+$body = & $auditorPath | Out-String
 
 # https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/send-mailmessage
 $parameters = @{
