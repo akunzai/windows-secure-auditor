@@ -9,8 +9,6 @@ Import-Module ([IO.Path]::Combine($PSScriptRoot, 'SecureAuditor.psm1')) -Force
 $i18n = Data {
 	# culture="en-US"
 	ConvertFrom-StringData @'
-	Match = match
-	NotMatch = not match
 	SystemInfo = System Information
 	Error = Error
 '@

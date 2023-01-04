@@ -16,7 +16,7 @@ if ($PSUICulture -ne 'en-US') {
 function Test($config) {
     if (-not (IsLocalAdministrator)) {
         $ruleName = [System.IO.Path]::GetFileNameWithoutExtension($PSCommandPath)
-        Write-RequireAdministrators($ruleName)
+        Write-RequireAdministrator($ruleName)
         return
     }
     # https://learn.microsoft.com/windows-server/administration/windows-commands/secedit-export

@@ -45,7 +45,7 @@ function IsLocalAdministrator() {
 	return $false;
 }
 
-function Write-RequireAdministrators($ruleName) {
+function Write-RequireAdministrator($ruleName) {
 	Write-Host "`n> $($i18n.SkipRule): $($ruleName) ($($i18n.RequireAdministrator)) ..."
 }
 
