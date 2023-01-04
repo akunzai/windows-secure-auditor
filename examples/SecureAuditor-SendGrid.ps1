@@ -5,8 +5,8 @@ param (
   [string]$From,
   [Parameter(Mandatory)]
   [string[]]$To,
-  [string]$apiKey,
-  [bool]$useSmtp = $false
+  [string]$ApiKey,
+  [bool]$UseSmtp = $false
 )
 
 if ($PSVersionTable.PSVersion.Major -lt 6) {
@@ -16,14 +16,14 @@ if ($PSVersionTable.PSVersion.Major -lt 6) {
 }
 
 if ($env:SENDGRID_API_KEY) {
-  $apiKey = $env:SENDGRID_API_KEY
+  $ApiKey = $env:SENDGRID_API_KEY
 }
 
 $subject = "Secure Audit Report for $env:COMPUTERNAME"
 $body = & $AuditorPath | Out-String
 
-if ($useSmtp) {
-  $password = $apiKey | ConvertTo-SecureString -AsPlainText -Force
+if ($UseSmtp) {
+  $password = $ApiKey | ConvertTo-SecureString -AsPlainText -Force
   $credential = New-Object Management.Automation.PSCredential ( 'apikey', $password )
   # https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/send-mailmessage
   Send-MailMessage -From $From -To $To `
