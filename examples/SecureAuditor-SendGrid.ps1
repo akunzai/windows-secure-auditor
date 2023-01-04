@@ -41,7 +41,7 @@ $parameters = @{
   subject          = $subject
   content          = @(@{ type = 'text/plain'; value = $body })
   from             = @{ email = $From }
-  personalizations = @()
+  personalizations = New-Object System.Collections.ArrayList
 }
 
 foreach ($email in $To) {
