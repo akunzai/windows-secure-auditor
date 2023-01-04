@@ -17,7 +17,7 @@ if ($PSUICulture -ne 'en-US') {
 function Test($config) {
     if (-not (IsLocalAdministrator)) {
         $ruleName = [System.IO.Path]::GetFileNameWithoutExtension($PSCommandPath)
-        Write-RequireAdministrators($ruleName)
+        Write-RequireAdministrator($ruleName)
         return
     }
     $days = [int]::Parse($config.Login.Days) * -1
