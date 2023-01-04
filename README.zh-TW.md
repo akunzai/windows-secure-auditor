@@ -1,6 +1,6 @@
 # Windows Secure Auditor
 
-> 可產生每日稭查報表的 PowerShell 腳本, 類似 Windows 版的 [Logwatch](https://sourceforge.net/projects/logwatch/)
+> 可產生每日稽查報表的 PowerShell 腳本, 類似 Windows 版的 [Logwatch](https://sourceforge.net/projects/logwatch/)
 
 ## 翻譯
 
