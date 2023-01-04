@@ -69,7 +69,7 @@ function Test($config) {
                     break success
                 }
                 $times = $loginSuccessForUser[$username][$ipAddress]
-                Write-Output "- $($username) $($i18n.LoginSuccess), $($i18n.IpAddress):$($ipAddress), $($i18n.Times): $($times)"
+                Write-Output "| $($username) | $($ipAddress) | $($times) |"
                 $eventCount += 1
             }
         }
