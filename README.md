@@ -30,7 +30,7 @@
 Sample output
 
 ````markdown
-# Windows Secure Auditor: 0.0.7
+# Windows Secure Auditor: 0.0.8
 
 ## System Information
 
