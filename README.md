@@ -78,6 +78,12 @@ An TLS 1.2 connection request was received from a remote client application, but
 |----------|------------|-------|
 | username | 127.0.0.2 | 7 |
 
+## Login failed
+
+| Username | IP Address | Times |
+|----------|------------|-------|
+| username | 127.0.0.3 | 1 |
+
 ## Network Time Sync
 
 - [x] Windows Time Service Started
@@ -94,10 +100,14 @@ Source: time.windows.com,0x8
 Poll Interval: 6 (64s)
 ```
 
+## Password Expires
+
+- [ ] WDeployAdmin: Account password never expires
+
 ## Password Policy
 
-- [ ] Minimum password age(days): 0 >= 1
-- [x] Maximum password age(days): 42 <= 90
-- [ ] Minimum password length: 0 >= 12
-- [ ] Password history size: 0 >= 3
+- [x] Minimum password age(days): 1 >= 1
+- [x] Maximum password age(days): 90 <= 90
+- [x] Minimum password length: 12 >= 12
+- [x] Password history size: 3 >= 3
 ````
