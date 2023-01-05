@@ -30,7 +30,7 @@
 範例輸出
 
 ````markdown
-# Windows Secure Auditor: 0.0.5
+# Windows Secure Auditor: 0.0.6
 
 ## 系統資訊
 
@@ -76,7 +76,7 @@ An TLS 1.2 connection request was received from a remote client application, but
 
 | 帳號 | 來源網路位址 | 計次 |
 |----------|------------|-------|
-| username | 127.0.0.1 | 7 |
+| username | 127.0.0.2 | 7 |
 
 ## 網路校時
 

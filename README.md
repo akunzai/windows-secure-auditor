@@ -30,7 +30,7 @@
 Sample output
 
 ````markdown
-# Windows Secure Auditor: 0.0.5
+# Windows Secure Auditor: 0.0.6
 
 ## System Information
 
@@ -76,7 +76,7 @@ An TLS 1.2 connection request was received from a remote client application, but
 
 | Username | IP Address | Times |
 |----------|------------|-------|
-| username | 127.0.0.1 | 7 |
+| username | 127.0.0.2 | 7 |
 
 ## Network Time Sync
 
