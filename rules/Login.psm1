@@ -37,7 +37,7 @@ function Test($config) {
             continue
         }
         $ipAddress = $event.Properties[18].Value
-        if ($ipAddress -eq '-') {
+        if ($ipAddress -match '(-|::1|127.0.0.1)') {
             continue
         }
         $username = $event.Properties[5].Value
