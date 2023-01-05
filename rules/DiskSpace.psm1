@@ -14,8 +14,8 @@ function Test($config) {
     Write-Output "`n## $($i18n.DiskSpace)`n"
     # https://learn.microsoft.com/windows/win32/cimwin32prov/win32-logicaldisk
     $logicalDisks = Get-WmiObject -Query "SELECT * FROM Win32_LogicalDisk Where Size > 0"
-    $exclude = $config.DiskUsage.Exclude
-    $maximunDiskUsage = $config.DiskUsage.MaximunDiskUsage
+    $exclude = $config.DiskSpace.Exclude
+    $maximunDiskUsage = $config.DiskSpace.MaximunDiskUsage
     foreach ($logicalDisk in $logicalDisks) {
         if (-not [string]::IsNullOrWhiteSpace($exclude) -and $logicalDisk.DeviceID -match $exclude) {
             continue
