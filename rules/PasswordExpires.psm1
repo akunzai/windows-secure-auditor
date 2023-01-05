@@ -2,7 +2,7 @@ $i18n = Data {
     # culture="en-US"
     ConvertFrom-StringData @'
     PasswordExpires = Password Expires
-    AccountPasswordNeverExpires = Account Password Never Expires
+    AccountPasswordNeverExpires = Account password never expires
 '@
 }
 

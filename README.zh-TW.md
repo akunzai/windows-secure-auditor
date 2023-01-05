@@ -30,7 +30,7 @@
 範例輸出
 
 ````markdown
-# Windows Secure Auditor: 0.0.8
+# Windows Secure Auditor: 0.0.9
 
 ## 系統資訊
 
@@ -49,7 +49,7 @@
 
 ## 預設帳號
 
-- [x] Administrator: 帳號己刪除
+- [x] Administrator: 帳號不存在
 - [x] Guest: 帳號已停用
 
 ## 磁碟空間
@@ -78,6 +78,12 @@ An TLS 1.2 connection request was received from a remote client application, but
 |----------|------------|-------|
 | username | 127.0.0.2 | 7 |
 
+## 登入失敗
+
+| 帳號 | 來源網路位址 | 計次 |
+|----------|------------|-------|
+| username | 127.0.0.3 | 1 |
+
 ## 網路校時
 
 - [x] Windows 時間同步服務已啟動
@@ -94,10 +100,14 @@ Source: time.windows.com,0x8
 Poll Interval: 6 (64s)
 ```
 
+## 密碼逾期
+
+- [ ] WDeployAdmin: 帳號密碼永不逾期
+
 ## 密碼原則
 
-- [ ] 密碼最短使用期限(天): 0 >= 1
-- [x] 密碼最長使用期限(天): 42 <= 90
-- [ ] 密碼長度下限: 0 >= 12
-- [ ] 密碼維護的歷程記錄長度: 0 >= 3
+- [x] 密碼最短使用期限(天): 1 >= 1
+- [x] 密碼最長使用期限(天): 90 <= 90
+- [x] 密碼長度下限: 12 >= 12
+- [x] 密碼維護的歷程記錄長度: 3 >= 3
 ````
