@@ -13,7 +13,7 @@ if ($PSVersionTable.PSVersion.Major -lt 6) {
   $ProgressPreference = 'SilentlyContinue'
 }
 
-if ($env:SENDGRID_API_KEY) {
+if ([string]::IsNullOrWhiteSpace($ApiKey) -and -not [string]::IsNullOrWhiteSpace($env:SENDGRID_API_KEY)) {
   $ApiKey = $env:SENDGRID_API_KEY
 }
 
