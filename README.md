@@ -49,7 +49,7 @@ Sample output
 
 ## Default Account
 
-- [x] Administrator: Account deleted
+- [x] Administrator: Account not found
 - [x] Guest: Account disabled
 
 ## Disk space

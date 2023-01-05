@@ -49,7 +49,7 @@
 
 ## 預設帳號
 
-- [x] Administrator: 帳號己刪除
+- [x] Administrator: 帳號不存在
 - [x] Guest: 帳號已停用
 
 ## 磁碟空間
