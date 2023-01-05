@@ -2,7 +2,6 @@ $i18n = Data {
     # culture="en-US"
     ConvertFrom-StringData @'
     IpAddress = IP Address
-    Login = Login
     LoginFailed = Login failed
     LoginSuccess = Login success
     Times = Times
