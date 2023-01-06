@@ -2,8 +2,8 @@ $i18n = Data {
     # culture="en-US"
     ConvertFrom-StringData @'
     DefaultAccount = Default Account
-    AccountNotFound = Account not found
-    AccountDisabled = Account disabled
+    NotFound = not found
+    Disabled = disabled
 '@
 }
 
@@ -17,9 +17,9 @@ function Test($config) {
     foreach ($userName in $userNames) {
         $localUser = Get-LocalUser $userName -ErrorAction SilentlyContinue
         if ($null -eq $localUser) {
-            Write-CheckList $true "$($userName): $($i18n.AccountNotFound)"
+            Write-CheckList $true "$($userName): $($i18n.NotFound)"
             continue
         }
-        Write-CheckList ($localUser.Enabled -eq $false) "$($userName): $($i18n.AccountDisabled)"
+        Write-CheckList ($localUser.Enabled -eq $false) "$($userName): $($i18n.Disabled)"
     }
 }

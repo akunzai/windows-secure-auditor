@@ -30,7 +30,7 @@
 Sample output
 
 ````markdown
-# Windows Secure Auditor: 0.0.9
+# Windows Secure Auditor: 0.0.10
 
 ## System Information
 
@@ -49,8 +49,8 @@ Sample output
 
 ## Default Account
 
-- [x] Administrator: Account not found
-- [x] Guest: Account disabled
+- [x] Administrator: not found
+- [x] Guest: disabled
 
 ## Disk space
 
@@ -102,7 +102,7 @@ Poll Interval: 6 (64s)
 
 ## Password Expires
 
-- [ ] WDeployAdmin: Account password never expires
+- [ ] WDeployAdmin: password never expires
 
 ## Password Policy
 
