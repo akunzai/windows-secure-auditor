@@ -30,7 +30,7 @@
 範例輸出
 
 ````markdown
-# Windows Secure Auditor: 0.0.9
+# Windows Secure Auditor: 0.0.10
 
 ## 系統資訊
 
@@ -49,8 +49,8 @@
 
 ## 預設帳號
 
-- [x] Administrator: 帳號不存在
-- [x] Guest: 帳號已停用
+- [x] Administrator: 不存在
+- [x] Guest: 已停用
 
 ## 磁碟空間
 
@@ -102,7 +102,7 @@ Poll Interval: 6 (64s)
 
 ## 密碼逾期
 
-- [ ] WDeployAdmin: 帳號密碼永不逾期
+- [ ] WDeployAdmin: 密碼永不逾期
 
 ## 密碼原則
 

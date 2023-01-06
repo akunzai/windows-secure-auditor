@@ -2,7 +2,7 @@ $i18n = Data {
     # culture="en-US"
     ConvertFrom-StringData @'
     PasswordExpires = Password Expires
-    AccountPasswordNeverExpires = Account password never expires
+    PasswordNeverExpires = password never expires
 '@
 }
 
@@ -22,6 +22,6 @@ function Test($config) {
         if (-not [string]::IsNullOrWhiteSpace($exclude) -and $userAccount.Name -match $exclude) {
             continue
         }
-        Write-CheckList $false "$($userAccount.Name): $($i18n.AccountPasswordNeverExpires)"
+        Write-CheckList $false "$($userAccount.Name): $($i18n.PasswordNeverExpires)"
     }
 }
