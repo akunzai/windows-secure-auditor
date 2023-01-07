@@ -74,9 +74,9 @@ An TLS 1.2 connection request was received from a remote client application, but
 
 ## 登入
 
-- username 登入成功
+- username: 登入成功
   - 127.0.0.2: 7 次
-- username 登入失敗
+- username: 登入失敗
   - 127.0.0.3: 1 次
 
 ## 網路校時

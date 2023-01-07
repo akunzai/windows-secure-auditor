@@ -74,9 +74,9 @@ An TLS 1.2 connection request was received from a remote client application, but
 
 ## Login
 
-- username Login Success
+- username: login success
   - 127.0.0.2: 7 Times
-- username Login Failed
+- username: login failed
   - 127.0.0.3: 1 Times
 
 ## Network Time Sync

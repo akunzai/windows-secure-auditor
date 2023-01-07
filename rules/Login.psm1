@@ -2,8 +2,8 @@ $i18n = Data {
     # culture="en-US"
     ConvertFrom-StringData @'
     Login = Login
-    LoginFailed = Login failed
-    LoginSuccess = Login success
+    LoginFailed = login failed
+    LoginSuccess = login success
     Times = Times
 '@
 }
