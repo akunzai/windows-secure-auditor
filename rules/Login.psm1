@@ -1,11 +1,10 @@
 $i18n = Data {
     # culture="en-US"
     ConvertFrom-StringData @'
-    IpAddress = IP Address
+    Login = Login
     LoginFailed = Login failed
     LoginSuccess = Login success
     Times = Times
-    Username = Username
 '@
 }
 
@@ -56,37 +55,33 @@ function Test($config) {
             $loginFailedForUser[$username][$ipAddress] += 1;
         }
     }
+    if ($loginSuccessForUser.Count -eq 0 -and $loginFailedForUser.Count -eq 0) {
+        return
+    }
+    Write-Output "`n## $($i18n.Login)`n"
     $maxEvents = [int]::Parse($config.Login.MaxEvents)
-    if ($loginSuccessForUser.Count -gt 0) {
-        Write-Output "`n## $($i18n.LoginSuccess)`n"
-        Write-Output "| $($i18n.Username) | $($i18n.IpAddress) | $($i18n.Times) |"
-        Write-Output "|----------|------------|-------|"
-        $eventCount = 0
-        :success foreach ($username in $loginSuccessForUser.Keys) {
-            foreach ($ipAddress in $loginSuccessForUser[$username].Keys) {
-                if ($eventCount -ge $maxEvents) {
-                    break success
-                }
-                $times = $loginSuccessForUser[$username][$ipAddress]
-                Write-Output "| $($username) | $($ipAddress) | $($times) |"
-                $eventCount += 1
+    $eventCount = 0
+    :success foreach ($username in $loginSuccessForUser.Keys) {
+        Write-Output "- $($username): $($i18n.LoginSuccess)"
+        foreach ($ipAddress in $loginSuccessForUser[$username].Keys) {
+            if ($eventCount -ge $maxEvents) {
+                break success
             }
+            $times = $loginSuccessForUser[$username][$ipAddress]
+            Write-Output "  - $($ipAddress): $($times) $($i18n.Times)"
+            $eventCount += 1
         }
     }
-    if ($loginFailedForUser.Count -gt 0) {
-        Write-Output "`n## $($i18n.LoginFailed)`n"
-        Write-Output "| $($i18n.Username) | $($i18n.IpAddress) | $($i18n.Times) |"
-        Write-Output "|----------|------------|-------|"
-        $eventCount = 0
-        :failed foreach ($username in $loginFailedForUser.Keys) {
-            foreach ($ipAddress in $loginFailedForUser[$username].Keys) {
-                if ($eventCount -ge $maxEvents) {
-                    break failed
-                }
-                $times = $loginFailedForUser[$username][$ipAddress]
-                Write-Output "| $($username) | $($ipAddress) | $($times) |"
-                $eventCount += 1
+    $eventCount = 0
+    :failed foreach ($username in $loginFailedForUser.Keys) {
+        Write-Output "- $($username): $($i18n.LoginFailed)"
+        foreach ($ipAddress in $loginFailedForUser[$username].Keys) {
+            if ($eventCount -ge $maxEvents) {
+                break failed
             }
+            $times = $loginFailedForUser[$username][$ipAddress]
+            Write-Output "  - $($ipAddress): $($times) $($i18n.Times)"
+            $eventCount += 1
         }
     }
 }
