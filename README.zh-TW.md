@@ -30,7 +30,7 @@
 範例輸出
 
 ````markdown
-# Windows Secure Auditor: 0.0.10
+# Windows Secure Auditor: 0.0.11
 
 ## 系統資訊
 
@@ -72,17 +72,12 @@ Unable to open the Server service performance object. The first four bytes (DWOR
 An TLS 1.2 connection request was received from a remote client application, but none of the cipher suites supported by the client application are supported by the server. The TLS connection request has failed.
 ```
 
-## 登入成功
+## 登入
 
-| 帳號 | 來源網路位址 | 計次 |
-|----------|------------|-------|
-| username | 127.0.0.2 | 7 |
-
-## 登入失敗
-
-| 帳號 | 來源網路位址 | 計次 |
-|----------|------------|-------|
-| username | 127.0.0.3 | 1 |
+- username 登入成功
+  - 127.0.0.2: 7 次
+- username 登入失敗
+  - 127.0.0.3: 1 次
 
 ## 網路校時
 
