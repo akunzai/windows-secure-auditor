@@ -7,6 +7,7 @@ $i18n = Data {
     Level = Level
     LogName = LogName
     Message = Message
+    ProviderName = ProviderName
 '@
 }
 
@@ -33,7 +34,7 @@ function Test($config) {
         return
     }
     Write-Output "`n## $($i18n.EventLogs)`n"
-    $events = $events | Select-Object Id, Level, LevelDisplayName, LogName, Message | Sort-Object -Property Level, Id | Group-Object -Property Level, Id
+    $events = $events | Select-Object Id, Level, LevelDisplayName, LogName, Message, ProviderName | Sort-Object -Property Level, Id | Group-Object -Property Level, Id
     $maxEvents = [int]::Parse($config.EventLogs.MaxEvents)
     $exclude = $config.EventLogs.Exclude
     $eventCount = 0
@@ -48,8 +49,9 @@ function Test($config) {
         $level = $event.Group[0].LevelDisplayName
         $logName = $event.Group[0].LogName
         $message = $event.Group[0].Message
+        $providerName = $event.Group[0].ProviderName
         $count = $event.Count;
-        Write-Output "- $($i18n.Level): $($level), $($i18n.EventId): $($eventId), $($i18n.LogName): $($logName), $($i18n.Count): $($count)"
+        Write-Output "- $($i18n.Level): $($level), $($i18n.EventId): $($eventId), $($i18n.LogName): $($logName), $($i18n.ProviderName): $($providerName), $($i18n.Count): $($count)"
         if ($null -ne $message) {
             Write-Output "`n``````log`n$($message.Trim())`n```````n"
         }

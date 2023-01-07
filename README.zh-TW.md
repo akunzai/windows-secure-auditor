@@ -30,7 +30,7 @@
 範例輸出
 
 ````markdown
-# Windows Secure Auditor: 0.0.12
+# Windows Secure Auditor: 0.1.0
 
 ## 系統資訊
 
@@ -60,13 +60,13 @@
 
 ## 事件記錄
 
-- 等級: 錯誤, 事件識別碼: 2004, 記錄檔: Application, 計次: 1
+- 等級: 錯誤, 事件識別碼: 2004, 記錄檔: Application, 提供者: Microsoft-Windows-PerfNet, 計次: 1
 
 ```log
 Unable to open the Server service performance object. The first four bytes (DWORD) of the Data section contains the status code.
 ```
 
-- 等級: 錯誤, 事件識別碼: 36874, 記錄檔: System, 計次: 25
+- 等級: 錯誤, 事件識別碼: 36874, 記錄檔: System, 提供者: Schannel, 計次: 25
 
 ```log
 An TLS 1.2 connection request was received from a remote client application, but none of the cipher suites supported by the client application are supported by the server. The TLS connection request has failed.

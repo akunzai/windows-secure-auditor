@@ -30,7 +30,7 @@
 Sample output
 
 ````markdown
-# Windows Secure Auditor: 0.0.12
+# Windows Secure Auditor: 0.1.0
 
 ## System Information
 
@@ -60,13 +60,13 @@ Sample output
 
 ## Event Logs
 
-- Level: Error, Event ID: 2004, LogName: Application, Count: 1
+- Level: Error, Event ID: 2004, LogName: Application, ProviderName: Microsoft-Windows-PerfNet, Count: 1
 
 ```log
 Unable to open the Server service performance object. The first four bytes (DWORD) of the Data section contains the status code.
 ```
 
-- Level: Error, Event ID: 36874, LogName: System, Count: 25
+- Level: Error, Event ID: 36874, LogName: System, ProviderName: Schannel, Count: 25
 
 ```log
 An TLS 1.2 connection request was received from a remote client application, but none of the cipher suites supported by the client application are supported by the server. The TLS connection request has failed.
