@@ -32,7 +32,7 @@ function Test($config) {
     if ($events.Count -eq 0) {
         return
     }
-    Write-Output "`n## $($i18n.EventLogs)"
+    Write-Output "`n## $($i18n.EventLogs)`n"
     $events = $events | Select-Object Id, Level, LevelDisplayName, LogName, Message | Sort-Object -Property Level, Id | Group-Object -Property Level, Id
     $maxEvents = [int]::Parse($config.EventLogs.MaxEvents)
     $exclude = $config.EventLogs.Exclude
@@ -47,10 +47,12 @@ function Test($config) {
         }
         $level = $event.Group[0].LevelDisplayName
         $logName = $event.Group[0].LogName
-        $message = $event.Group[0].Message.Trim()
+        $message = $event.Group[0].Message
         $count = $event.Count;
-        Write-Output "`n- $($i18n.Level): $($level), $($i18n.EventId): $($eventId), $($i18n.LogName): $($logName), $($i18n.Count): $($count)"
-        Write-Output "`n``````log`n$($message)`n``````"
+        Write-Output "- $($i18n.Level): $($level), $($i18n.EventId): $($eventId), $($i18n.LogName): $($logName), $($i18n.Count): $($count)"
+        if ($null -ne $message) {
+            Write-Output "`n``````log`n$($message.Trim())`n```````n"
+        }
         $eventCount += 1
     }
 }

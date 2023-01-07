@@ -30,7 +30,7 @@
 範例輸出
 
 ````markdown
-# Windows Secure Auditor: 0.0.11
+# Windows Secure Auditor: 0.0.12
 
 ## 系統資訊
 
