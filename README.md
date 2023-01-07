@@ -89,9 +89,9 @@ Stratum: 4 (secondary reference - syncd by (S)NTP)
 Precision: -23 (119.209ns per tick)
 Root Delay: 0.0037284s
 Root Dispersion: 0.0346264s
-ReferenceId: 0x142B5EC7 (source IP:  20.43.94.199)
+ReferenceId: 0x142B5EC7 (source IP:  127.0.0.3)
 Last Successful Sync Time: 1/4/2023 9:41:39 PM
-Source: time.windows.com,0x8 
+Source: time.windows.com,0x8
 Poll Interval: 6 (64s)
 ```
 
