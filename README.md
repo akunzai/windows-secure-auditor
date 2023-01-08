@@ -19,6 +19,21 @@
 - Extensible [rules](./rules/)
 - Overridable settings (`SecureAuditor.local.ini`)
 
+## Installation
+
+> [git](https://git-scm.com/downloads) is required
+
+```powershll
+# Use git to clone this repo
+git clone https://github.com/akunzai/windows-secure-auditor.git
+
+# Enter the directory
+cd windows-secure-auditor
+
+# In the future, you can update to the latest version through `git pull`
+git pull
+```
+
 ## Usage
 
 > See more sample usage in [examples](./examples/)
@@ -26,6 +41,8 @@
 ```powershell
 .\SecureAuditor.ps1
 ```
+
+> The corresponding configuration of `SecureAuditor.local.ini` can be overridden by creating `SecureAuditor.local.ini` in the project directory
 
 Sample output
 

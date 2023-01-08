@@ -19,6 +19,21 @@
 - 可擴充的[規則](./rules/)
 - 可覆寫的配置 (`SecureAuditor.local.ini`)
 
+## 安裝
+
+> 需要使用 [git](https://git-scm.com/downloads)
+
+```powershll
+# 使用 git 複製此專案
+git clone https://github.com/akunzai/windows-secure-auditor.git
+
+# 進入專案目錄
+cd windows-secure-auditor
+
+# 未來可透過 `git pull` 來更新至最新版本
+git pull
+```
+
 ## 使用方式
 
 > 可在 [examples](./examples/) 看到更多使用範例
@@ -26,6 +41,8 @@
 ```powershell
 .\SecureAuditor.ps1
 ```
+
+> 可透過在專案目錄建立 `SecureAuditor.local.ini` 來覆寫 `SecureAuditor.local.ini` 的對應配置
 
 範例輸出
 
