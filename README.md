@@ -30,7 +30,7 @@
 Sample output
 
 ````markdown
-# Windows Secure Auditor: 0.1.0
+# Windows Secure Auditor: 0.1.1
 
 ## System Information
 
@@ -52,11 +52,10 @@ Sample output
 - [x] Administrator: not found
 - [x] Guest: disabled
 
-## Disk space
+## Disk Space
 
-- [x] C: Disk space: 126.45 GB, Usage: 14.94% <= 90%
-- [x] D: Disk space: 8.00 GB, Usage: 13.03% <= 90%
-- [x] E: Disk space: 63.98 GB, Usage: 14.77% <= 90%
+- [x] C: Size: 126.45 GB, FreeSpace: 107.56 GB, Usage: 14.94% <= 90%
+- [x] D: Size: 8.00 GB, FreeSpace: 6.96 GB, Usage: 13.03% <= 90%
 
 ## Event Logs
 
