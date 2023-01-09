@@ -47,7 +47,7 @@ git pull
 範例輸出
 
 ````markdown
-# Windows Secure Auditor: 0.2.1
+# Windows Secure Auditor: 0.3.0
 
 ## 系統資訊
 
@@ -125,4 +125,8 @@ An TLS 1.2 connection request was received from a remote client application, but
 - [x] 密碼最長使用期限(天): 90 <= 90
 - [x] 密碼長度下限: 12 >= 12
 - [x] 密碼維護的歷程記錄長度: 3 >= 3
+
+## Windows 更新
+
+- Security Intelligence Update for Microsoft Defender Antivirus - KB2267602 (Version 1.381.1969.0)
 ````
