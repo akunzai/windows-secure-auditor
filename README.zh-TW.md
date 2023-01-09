@@ -138,7 +138,8 @@ An TLS 1.2 connection request was received from a remote client application, but
 
 ## 使用者帳號管理
 
-- `bob` 建立 `john` 於 2023-01-03T21:23:34.0000000+08:00 
+- `bob` 建立 `john` 於 2023-01-03T21:10:00.0000000+08:00
+- `bob` 刪除 `john` 於 2023-01-03T21:20:00.0000000+08:00 
 
 ## Windows 更新
 

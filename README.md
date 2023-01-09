@@ -138,7 +138,8 @@ Poll Interval: 6 (64s)
 
 ## User Account Management
 
-- `bob` create `john` at 2023-01-03T21:23:34.0000000+08:00
+- `bob` create `john` at 2023-01-03T21:10:00.0000000+08:00
+- `bob` delete `john` at 2023-01-03T21:20:00.0000000+08:00
 
 ## Windows Update
 
