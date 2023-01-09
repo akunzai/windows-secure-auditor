@@ -136,7 +136,7 @@ An TLS 1.2 connection request was received from a remote client application, but
 
 - Product: Bonjour -- Removal completed successfully.
 
-## 已建立使用者帳戶
+## 已建立使用者帳號
 
 - john: 建立者: bob, 建立時間: 2023-01-03T21:23:34.0000000+08:00
 
