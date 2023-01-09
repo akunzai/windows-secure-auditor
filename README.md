@@ -47,7 +47,7 @@ git pull
 Sample output
 
 ````markdown
-# Windows Secure Auditor: 0.2.1
+# Windows Secure Auditor: 0.3.0
 
 ## System Information
 
@@ -125,4 +125,8 @@ Poll Interval: 6 (64s)
 - [x] Maximum password age(days): 90 <= 90
 - [x] Minimum password length: 12 >= 12
 - [x] Password history size: 3 >= 3
+
+## Windows Update
+
+- Security Intelligence Update for Microsoft Defender Antivirus - KB2267602 (Version 1.381.1969.0)
 ````
