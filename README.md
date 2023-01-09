@@ -14,8 +14,8 @@
 
 ## Features
 
-- Output as Markdown, make it easy to convert to HTML
-- Localization
+- Output as Markdown
+- [Localization](https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_script_internationalization)
 - Extensible [rules](./rules/)
 - Overridable settings (`SecureAuditor.local.ini`)
 

@@ -14,8 +14,8 @@
 
 ## 功能特色
 
-- 輸出為 Markdown 格式, 易於轉換為 HTML 格式
-- 本地化
+- 輸出格式為 Markdown
+- [本地化](https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_script_internationalization)
 - 可擴充的[規則](./rules/)
 - 可覆寫的配置 (`SecureAuditor.local.ini`)
 
