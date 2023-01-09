@@ -47,14 +47,14 @@ git pull
 Sample output
 
 ````markdown
-# Windows Secure Auditor: 0.3.0
+# Windows Secure Auditor: 0.4.0
 
 ## System Information
 
 - OSName: Microsoft Windows Server 2019 Datacenter
 - OsVersion: 10.0.17763
 - OsLocale: en-US
-- OsLocalDateTime: 01/04/2023 21:41:44
+- OsLocalDateTime: 01/04/2023 00:00:00
 - TimeZone: (UTC+08:00) Taipei
 - OsUpTime: 10.04:26:15.1008481
 - OsHotFixes:
@@ -125,6 +125,10 @@ Poll Interval: 6 (64s)
 - [x] Maximum password age(days): 90 <= 90
 - [x] Minimum password length: 12 >= 12
 - [x] Password history size: 3 >= 3
+
+## User Account Created
+
+- john: creator: bob, created at: 2023-01-03T21:23:34.0000000+08:00
 
 ## Windows Update
 
