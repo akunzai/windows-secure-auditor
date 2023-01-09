@@ -47,7 +47,7 @@ git pull
 範例輸出
 
 ````markdown
-# Windows Secure Auditor: 0.5.0
+# Windows Secure Auditor: 0.6.0
 
 ## 系統資訊
 
@@ -136,9 +136,9 @@ An TLS 1.2 connection request was received from a remote client application, but
 
 - Product: Bonjour -- Removal completed successfully.
 
-## 已建立使用者帳號
+## 使用者帳號管理
 
-- john: 建立者: bob, 建立時間: 2023-01-03T21:23:34.0000000+08:00
+- `bob` 建立 `john` 於 2023-01-03T21:23:34.0000000+08:00 
 
 ## Windows 更新
 

@@ -47,7 +47,7 @@ git pull
 Sample output
 
 ````markdown
-# Windows Secure Auditor: 0.5.0
+# Windows Secure Auditor: 0.6.0
 
 ## System Information
 
@@ -136,9 +136,9 @@ Poll Interval: 6 (64s)
 
 - Product: Bonjour -- Removal completed successfully.
 
-## User Account Created
+## User Account Management
 
-- john: creator: bob, created at: 2023-01-03T21:23:34.0000000+08:00
+- `bob` create `john` at 2023-01-03T21:23:34.0000000+08:00
 
 ## Windows Update
 
