@@ -47,14 +47,14 @@ git pull
 範例輸出
 
 ````markdown
-# Windows Secure Auditor: 0.3.0
+# Windows Secure Auditor: 0.4.0
 
 ## 系統資訊
 
 - OSName: Microsoft Windows Server 2019 Datacenter
 - OsVersion: 10.0.17763
 - OsLocale: en-US
-- OsLocalDateTime: 01/04/2023 21:41:44
+- OsLocalDateTime: 01/04/2023 00:00:00
 - TimeZone: (UTC+08:00) Taipei
 - OsUpTime: 10.04:26:15.1008481
 - OsHotFixes:
@@ -125,6 +125,10 @@ An TLS 1.2 connection request was received from a remote client application, but
 - [x] 密碼最長使用期限(天): 90 <= 90
 - [x] 密碼長度下限: 12 >= 12
 - [x] 密碼維護的歷程記錄長度: 3 >= 3
+
+## 已建立使用者帳戶
+
+- john: 建立者: bob, 建立時間: 2023-01-03T21:23:34.0000000+08:00
 
 ## Windows 更新
 
