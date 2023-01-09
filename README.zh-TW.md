@@ -47,7 +47,7 @@ git pull
 範例輸出
 
 ````markdown
-# Windows Secure Auditor: 0.1.1
+# Windows Secure Auditor: 0.2.0
 
 ## 系統資訊
 
@@ -88,11 +88,15 @@ Unable to open the Server service performance object. The first four bytes (DWOR
 An TLS 1.2 connection request was received from a remote client application, but none of the cipher suites supported by the client application are supported by the server. The TLS connection request has failed.
 ```
 
+## 閒置帳號
+
+- [ ] alice: 上次登入於 2022-01-01
+
 ## 登入
 
-- username: 登入成功
+- bob: 登入成功
   - 127.0.0.2: 7 次
-- username: 登入失敗
+- bob: 登入失敗
   - 127.0.0.3: 1 次
 
 ## 網路校時
