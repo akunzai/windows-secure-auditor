@@ -11,17 +11,17 @@ if ($PSUICulture -ne 'en-US') {
 }
 
 function Test($config) {
-    # https://learn.microsoft.com/windows/win32/cimwin32prov/win32-useraccount
-    $userAccounts = Get-WmiObject -Query "SELECT * FROM Win32_UserAccount WHERE LocalAccount = true AND Disabled = false AND PasswordExpires = false"
-    if ($userAccounts.Count -eq 0) {
+    # https://learn.microsoft.com/powershell/module/microsoft.powershell.localaccounts/get-localuser
+    $users = Get-LocalUser | Where-Object { $_.Enabled -and $null -eq $_.PasswordExpires }
+    $exclude = $config.PasswordExpires.Exclude;
+    if (-not [string]::IsNullOrWhiteSpace($exclude)) {
+        $users = $users | Where-Object { $_.Name -notmatch $exclude }
+    }
+    if ($users.Count -eq 0) {
         return;
     }
-    $exclude = $config.PasswordExpires.Exclude;
     Write-Output "`n## $($i18n.PasswordExpires)`n"
-    foreach ($userAccount in $userAccounts) {
-        if (-not [string]::IsNullOrWhiteSpace($exclude) -and $userAccount.Name -match $exclude) {
-            continue
-        }
-        Write-CheckList $false "$($userAccount.Name): $($i18n.PasswordNeverExpires)"
+    foreach ($user in $users) {
+        Write-CheckList $false "$($user.Name): $($i18n.PasswordNeverExpires)"
     }
 }
