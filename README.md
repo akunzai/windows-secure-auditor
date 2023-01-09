@@ -47,7 +47,7 @@ git pull
 Sample output
 
 ````markdown
-# Windows Secure Auditor: 0.4.0
+# Windows Secure Auditor: 0.5.0
 
 ## System Information
 
@@ -125,6 +125,16 @@ Poll Interval: 6 (64s)
 - [x] Maximum password age(days): 90 <= 90
 - [x] Minimum password length: 12 >= 12
 - [x] Password history size: 3 >= 3
+
+## Software Installation
+
+### Install
+
+- Product: windows_exporter -- Installation completed successfully.
+
+### Removal
+
+- Product: Bonjour -- Removal completed successfully.
 
 ## User Account Created
 
