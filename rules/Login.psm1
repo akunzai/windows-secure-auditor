@@ -21,9 +21,9 @@ function Test($config) {
     $days = [int]::Parse($config.Login.Days) * -1
     # https://learn.microsoft.com/windows/security/threat-protection/auditing/basic-audit-logon-events
     $events = Get-WinEvent -FilterHashtable @{ 
-        LogName   = 'Security';
-        Id        = 4624, 4625;
-        StartTime = (get-date).AddDays($days);
+        LogName   = 'Security'
+        Id        = 4624, 4625
+        StartTime = (Get-Date).AddDays($days)
     } -ErrorAction SilentlyContinue
     if ($events.Count -eq 0) {
         return

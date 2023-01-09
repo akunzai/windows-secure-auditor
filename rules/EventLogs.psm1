@@ -26,9 +26,9 @@ function Test($config) {
     $days = [int]::Parse($config.EventLogs.Days) * -1
     # https://learn.microsoft.com/powershell/scripting/samples/creating-get-winevent-queries-with-filterhashtable
     $events = Get-WinEvent -FilterHashtable @{ 
-        LogName   = $logNames;
-        Level     = $levels;
-        StartTime = (get-date).AddDays($days);
+        LogName   = $logNames
+        Level     = $levels
+        StartTime = (Get-Date).AddDays($days)
     } -ErrorAction SilentlyContinue
     if ($events.Count -eq 0) {
         return
