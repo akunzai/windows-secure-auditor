@@ -47,7 +47,7 @@ git pull
 範例輸出
 
 ````markdown
-# Windows Secure Auditor: 0.4.0
+# Windows Secure Auditor: 0.5.0
 
 ## 系統資訊
 
@@ -125,6 +125,16 @@ An TLS 1.2 connection request was received from a remote client application, but
 - [x] 密碼最長使用期限(天): 90 <= 90
 - [x] 密碼長度下限: 12 >= 12
 - [x] 密碼維護的歷程記錄長度: 3 >= 3
+
+## 軟體安裝
+
+### 安裝
+
+- Product: windows_exporter -- Installation completed successfully.
+
+### 移除
+
+- Product: Bonjour -- Removal completed successfully.
 
 ## 已建立使用者帳戶
 
