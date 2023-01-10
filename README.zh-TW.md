@@ -47,7 +47,7 @@ git pull
 範例輸出
 
 ````markdown
-# Windows Secure Auditor: 0.6.2
+# Windows Secure Auditor: 0.7.0
 
 ## 系統資訊
 
@@ -63,6 +63,11 @@ git pull
   - KB5012170: 12/24/2022 Security Update
   - KB5021237: 12/11/2022 Security Update
   - KB5020374: 12/11/2022 Security Update
+
+## 防毒軟體
+
+- [x] 已安裝: ESET Security
+- [x] 更新狀態: Tue, 3 Jan 2023 02:04:43 GMT
 
 ## 預設帳號
 
