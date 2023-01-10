@@ -18,7 +18,7 @@ function Test($config) {
 		Write-RequireAdministrator($ruleName)
 		return
 	}
-	$days = [int]::Parse($config.UserAccountCreated.Days) * -1
+	$days = [int]::Parse($config.UserAccountManagement.Days) * -1
 	# https://learn.microsoft.com/powershell/scripting/samples/creating-get-winevent-queries-with-filterhashtable
 	$events = Get-WinEvent -FilterHashtable @{ 
 		LogName   = 'Security'
