@@ -137,12 +137,7 @@ Poll Interval: 6 (64s)
 
 ## Software Installation
 
-### Install
-
 - Product: windows_exporter -- Installation completed successfully.
-
-### Removal
-
 - Product: Bonjour -- Removal completed successfully.
 
 ## User Account Management

@@ -137,12 +137,7 @@ An TLS 1.2 connection request was received from a remote client application, but
 
 ## 軟體安裝
 
-### 安裝
-
 - Product: windows_exporter -- Installation completed successfully.
-
-### 移除
-
 - Product: Bonjour -- Removal completed successfully.
 
 ## 使用者帳號管理
