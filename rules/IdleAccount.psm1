@@ -24,6 +24,6 @@ function Test($config) {
     }
     Write-Output "`n## $($i18n.IdleAccount)`n"
     foreach ($user in $users) {
-        Write-CheckList $false ("$($user.Name): $($i18n.LastLogonAt) {0:yyy-MM-dd}" -f $user.LastLogon)
+        Write-CheckList $false ("$($user.Name): $($i18n.LastLogonAt) {0:yyyy-MM-dd'T'HH:mm:ssK}" -f $user.LastLogon)
     }
 }

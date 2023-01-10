@@ -95,7 +95,7 @@ An TLS 1.2 connection request was received from a remote client application, but
 
 ## 閒置帳號
 
-- [ ] alice: 上次登入於 2021-01-01
+- [ ] alice: 上次登入於 2021-01-01T09:10:00+08:00
 
 ## 登入
 
