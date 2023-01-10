@@ -26,6 +26,5 @@ function Test($config) {
 	}
 	catch {
 		Write-Host -ForegroundColor Red "> $($i18n.FiledToCheckUpdates): $_"
-		return
 	}
 }

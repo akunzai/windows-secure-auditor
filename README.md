@@ -47,7 +47,7 @@ git pull
 Sample output
 
 ````markdown
-# Windows Secure Auditor: 0.6.2
+# Windows Secure Auditor: 0.7.0
 
 ## System Information
 
@@ -63,6 +63,11 @@ Sample output
   - KB5012170: 12/24/2022 Security Update
   - KB5021237: 12/11/2022 Security Update
   - KB5020374: 12/11/2022 Security Update
+
+## Antivirus
+
+- [x] Installed: ESET Security
+- [x] Up-To-Date: Tue, 3 Jan 2023 02:04:43 GMT
 
 ## Default Account
 
