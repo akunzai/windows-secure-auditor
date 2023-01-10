@@ -110,7 +110,7 @@ An TLS 1.2 connection request was received from a remote client application, but
 根延遲: 0.0037284s
 根散佈: 0.0346264s
 參照識別碼: 0xC0A81704 (來源 IP:  127.0.0.3)
-上次成功同步處理時間: 2023/1/4 下午 9:41:39
+上次成功同步處理時間: 2023/1/3 下午 23:59:39
 來源: time.windows.com,0x8
 輪詢間隔: 6 (64s)
 ```

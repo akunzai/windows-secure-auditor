@@ -110,7 +110,7 @@ Precision: -23 (119.209ns per tick)
 Root Delay: 0.0037284s
 Root Dispersion: 0.0346264s
 ReferenceId: 0x142B5EC7 (source IP:  127.0.0.3)
-Last Successful Sync Time: 1/4/2023 9:41:39 PM
+Last Successful Sync Time: 1/3/2023 23:59:39 PM
 Source: time.windows.com,0x8
 Poll Interval: 6 (64s)
 ```
