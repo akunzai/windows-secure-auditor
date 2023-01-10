@@ -47,7 +47,7 @@ git pull
 範例輸出
 
 ````markdown
-# Windows Secure Auditor: 0.7.1
+# Windows Secure Auditor: 0.7.2
 
 ## 系統資訊
 
@@ -95,7 +95,7 @@ An TLS 1.2 connection request was received from a remote client application, but
 
 ## 閒置帳號
 
-- [ ] alice: 上次登入於 2021-01-01
+- [ ] alice: 上次登入於 2021-01-01T09:10:00+08:00
 
 ## 登入
 
@@ -137,16 +137,11 @@ An TLS 1.2 connection request was received from a remote client application, but
 
 ## 軟體安裝
 
-### 安裝
-
 - Product: windows_exporter -- Installation completed successfully.
-
-### 移除
-
 - Product: Bonjour -- Removal completed successfully.
 
 ## 使用者帳號管理
 
-- `bob` 建立 `john` 於 2023-01-03T21:10:00.0000000+08:00
-- `bob` 刪除 `john` 於 2023-01-03T21:20:00.0000000+08:00 
+- 2023-01-03T21:10:00+08:00| `bob` 建立 `john` 
+- 2023-01-03T21:20:00+08:00| `bob` 刪除 `john`
 ````

@@ -47,7 +47,7 @@ git pull
 Sample output
 
 ````markdown
-# Windows Secure Auditor: 0.7.1
+# Windows Secure Auditor: 0.7.2
 
 ## System Information
 
@@ -95,7 +95,7 @@ An TLS 1.2 connection request was received from a remote client application, but
 
 ## Idle Account
 
-- [ ] alice: last logon at 2021-01-01
+- [ ] alice: last logon at 2021-01-01T09:10:00+08:00
 
 ## Login
 
@@ -137,16 +137,11 @@ Poll Interval: 6 (64s)
 
 ## Software Installation
 
-### Install
-
 - Product: windows_exporter -- Installation completed successfully.
-
-### Removal
-
 - Product: Bonjour -- Removal completed successfully.
 
 ## User Account Management
 
-- `bob` create `john` at 2023-01-03T21:10:00.0000000+08:00
-- `bob` delete `john` at 2023-01-03T21:20:00.0000000+08:00
+- 2023-01-03T21:10:00+08:00| `bob` create `john`
+- 2023-01-03T21:20:00+08:00| `bob` delete `john`
 ````
