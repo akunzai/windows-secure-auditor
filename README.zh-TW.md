@@ -47,7 +47,7 @@ git pull
 範例輸出
 
 ````markdown
-# Windows Secure Auditor: 0.7.2
+# Windows Secure Auditor: 0.8.0
 
 ## 系統資訊
 
@@ -66,8 +66,8 @@ git pull
 
 ## 防毒軟體
 
-- [x] 已安裝: ESET Security
-- [x] 更新狀態: Tue, 3 Jan 2023 02:04:43 GMT
+- [x] 已安裝: Windows Defender 4.18.2211.5
+- [x] 更新狀態: 2023-01-03T09:30:00+08:00 - 1.381.1994.0
 
 ## 預設帳號
 
