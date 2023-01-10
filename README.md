@@ -47,7 +47,7 @@ git pull
 Sample output
 
 ````markdown
-# Windows Secure Auditor: 0.7.0
+# Windows Secure Auditor: 0.7.1
 
 ## System Information
 
@@ -95,7 +95,7 @@ An TLS 1.2 connection request was received from a remote client application, but
 
 ## Idle Account
 
-- [ ] alice: last logon at 2022-01-01
+- [ ] alice: last logon at 2021-01-01
 
 ## Login
 
