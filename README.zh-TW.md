@@ -47,7 +47,7 @@ git pull
 範例輸出
 
 ````markdown
-# Windows Secure Auditor: 0.7.0
+# Windows Secure Auditor: 0.7.1
 
 ## 系統資訊
 
@@ -95,7 +95,7 @@ An TLS 1.2 connection request was received from a remote client application, but
 
 ## 閒置帳號
 
-- [ ] alice: 上次登入於 2022-01-01
+- [ ] alice: 上次登入於 2021-01-01
 
 ## 登入
 
