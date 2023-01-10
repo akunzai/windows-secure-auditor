@@ -1,7 +1,7 @@
 $i18n = Data {
 	# culture="en-US"
 	ConvertFrom-StringData @'
-    WindowsUpdate = Windows Update
+    PendingUpdates = Pending Windows Update
 '@
 }
 
@@ -17,8 +17,8 @@ function Test($config) {
 	if ($result.updates.Count -eq 0) {
 		return;
 	}
-	Write-Output "`n## $($i18n.WindowsUpdate)`n"
+	Write-Output "`n## $($i18n.PendingUpdates)`n"
 	foreach ($update in $result.updates) {
-		Write-Output "- $($update.Title)"
+		Write-CheckList $false $update.Title
 	}
 }

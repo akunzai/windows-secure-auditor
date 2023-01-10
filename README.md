@@ -47,7 +47,7 @@ git pull
 Sample output
 
 ````markdown
-# Windows Secure Auditor: 0.6.0
+# Windows Secure Auditor: 0.6.1
 
 ## System Information
 
@@ -126,6 +126,10 @@ Poll Interval: 6 (64s)
 - [x] Minimum password length: 12 >= 12
 - [x] Password history size: 3 >= 3
 
+## Pending Windows Update
+
+- [ ] Security Intelligence Update for Microsoft Defender Antivirus - KB2267602 (Version 1.381.1969.0)
+
 ## Software Installation
 
 ### Install
@@ -140,8 +144,4 @@ Poll Interval: 6 (64s)
 
 - `bob` create `john` at 2023-01-03T21:10:00.0000000+08:00
 - `bob` delete `john` at 2023-01-03T21:20:00.0000000+08:00
-
-## Windows Update
-
-- Security Intelligence Update for Microsoft Defender Antivirus - KB2267602 (Version 1.381.1969.0)
 ````
