@@ -8,6 +8,10 @@ param (
 )
 
 if ($PSVersionTable.PSVersion.Major -lt 6) {
+  # Enable tls1.2 from default (Ssl3, Tls)
+  # https://stackoverflow.com/questions/41618766/powershell-invoke-webrequest-fails-with-ssl-tls-secure-channel
+  [Net.ServicePointManager]::SecurityProtocol = 'tls12, tls11, tls'
+
   # Progress bar can significantly impact cmdlet performance
   # https://github.com/PowerShell/PowerShell/issues/2138
   $ProgressPreference = 'SilentlyContinue'
@@ -45,7 +49,7 @@ $parameters = @{
 }
 
 foreach ($email in $To) {
-  $parameters.personalizations.Add(@{ to = @( @{ email = $email } ) })
+  [void]$parameters.personalizations.Add(@{ to = @( @{ email = $email } ) })
 }
 
 $json = $parameters | ConvertTo-Json -Depth 4 -Compress
