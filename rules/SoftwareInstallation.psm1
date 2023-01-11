@@ -27,7 +27,7 @@ function Test($config) {
 		return
 	}
 	Write-Output "`n## $($i18n.SoftwareInstallation)`n"
-	foreach ($event in $installEvents) {
+	foreach ($event in $events) {
 		Write-Output "- $($event.Message)"
 	}
 }

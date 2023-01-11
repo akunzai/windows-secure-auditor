@@ -10,7 +10,7 @@
 
 ```powershell
 # Create the task script from template
-Copy-Item ./SecureAuditor-Task.Template.ps1 -Destination ./SecureAuditor-Task.ps1
+cp ./SecureAuditor-Task.Template.ps1 ./SecureAuditor-Task.ps1
 
 # Modify the task script as you need
 notepad ./SecureAuditor-Task.ps1
