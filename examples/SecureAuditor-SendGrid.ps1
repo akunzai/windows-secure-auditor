@@ -49,7 +49,7 @@ $parameters = @{
 }
 
 foreach ($email in $To) {
-  $parameters.personalizations.Add(@{ to = @( @{ email = $email } ) })
+  [void]$parameters.personalizations.Add(@{ to = @( @{ email = $email } ) })
 }
 
 $json = $parameters | ConvertTo-Json -Depth 4 -Compress
