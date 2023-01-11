@@ -10,7 +10,7 @@
 
 ```powershell
 # 自範本建立工作腳本
-Copy-Item ./SecureAuditor-Task.Template.ps1 -Destination ./SecureAuditor-Task.ps1
+cp ./SecureAuditor-Task.Template.ps1 ./SecureAuditor-Task.ps1
 
 # 依需求修改工作腳本
 notepad ./SecureAuditor-Task.ps1
