@@ -33,11 +33,11 @@ function Test($config) {
 		$actor = $event.Properties[4].Value
 		# https://learn.microsoft.com/windows/security/threat-protection/auditing/event-4720
 		if ($event.Id -eq 4720) {
-			Write-Output ("- {0:yyyy-MM-dd'T'HH:mm:ssK}| ``$($actor)`` $($i18n.Create) ``$($username)``" -f $event.TimeCreated)
+			Write-Output ("- {0:yyyy-MM-dd'T'HH:mm:ssK} | ``$($actor)`` $($i18n.Create) ``$($username)``" -f $event.TimeCreated)
 		}
 		# https://learn.microsoft.com/windows/security/threat-protection/auditing/event-4726
 		elseif ($event.Id -eq 4726) {
-			Write-Output ("- {0:yyyy-MM-dd'T'HH:mm:ssK}| ``$($actor)`` $($i18n.Delete) ``$($username)``" -f $event.TimeCreated)
+			Write-Output ("- {0:yyyy-MM-dd'T'HH:mm:ssK} | ``$($actor)`` $($i18n.Delete) ``$($username)``" -f $event.TimeCreated)
 		}
 	}
 }

@@ -47,7 +47,7 @@ git pull
 範例輸出
 
 ````markdown
-# Windows Secure Auditor: 0.8.1
+# Windows Secure Auditor: 0.9.0
 
 ## 系統資訊
 
@@ -140,8 +140,16 @@ An TLS 1.2 connection request was received from a remote client application, but
 - Product: windows_exporter -- Installation completed successfully.
 - Product: Bonjour -- Removal completed successfully.
 
+## 系統關機
+
+- 2023-01-03T08:30:00+08:00 | 系統已重新開機，但未先正常關機。若系統停止回應、當機或電力意外中斷，就可能會造成此錯誤。
+- 2023-01-03T23:00:00+08:00 | 處理程序 C:\Windows\system32\svchost.exe (DEMO)已代表使用者 NT AUTHORITY\SYSTEM 啟動電腦 DEMO 的電源關閉，原因如下: 作業系統: Service Pack (計劃之中)
+ 理由代碼: 0x80020010
+ 關機類型: 重新啟動
+ 註解:
+
 ## 使用者帳號管理
 
-- 2023-01-03T21:20:00+08:00| `bob` 刪除 `john`
-- 2023-01-03T21:10:00+08:00| `bob` 建立 `john`
+- 2023-01-03T21:20:00+08:00 | `bob` 刪除 `john`
+- 2023-01-03T21:10:00+08:00 | `bob` 建立 `john`
 ````

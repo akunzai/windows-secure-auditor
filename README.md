@@ -47,7 +47,7 @@ git pull
 Sample output
 
 ````markdown
-# Windows Secure Auditor: 0.8.1
+# Windows Secure Auditor: 0.9.0
 
 ## System Information
 
@@ -140,8 +140,16 @@ Poll Interval: 6 (64s)
 - Product: windows_exporter -- Installation completed successfully.
 - Product: Bonjour -- Removal completed successfully.
 
+## Shutdown
+
+- 2023-01-03T08:30:00+08:00 | The system has rebooted without cleanly shutting down first.
+- 2023-01-03T23:00:00+08:00 | The process C:\Windows\system32\svchost.exe (DEMO) has initiated the restart of computer DEMO on behalf of user NT AUTHORITY\SYSTEM for the following reason: Operating System: Service pack (Planned)
+ Reason Code: 0x80020010
+ Shutdown Type: restart
+ Comment:
+
 ## User Account Management
 
-- 2023-01-03T21:20:00+08:00| `bob` delete `john`
-- 2023-01-03T21:10:00+08:00| `bob` create `john`
+- 2023-01-03T21:20:00+08:00 | `bob` delete `john`
+- 2023-01-03T21:10:00+08:00 | `bob` create `john`
 ````
