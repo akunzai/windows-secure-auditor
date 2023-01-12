@@ -17,7 +17,7 @@
 - Output as Markdown
 - [Localization](https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_script_internationalization)
 - Extensible [rules](./rules/)
-- Overridable settings (`SecureAuditor.local.ini`)
+- Overridable [settings](./SecureAuditor.ini)
 
 ## Installation
 
@@ -42,7 +42,7 @@ git pull
 .\SecureAuditor.ps1
 ```
 
-> The corresponding configuration of `SecureAuditor.local.ini` can be overridden by creating `SecureAuditor.local.ini` in the project directory
+> The corresponding configuration of `SecureAuditor.ini` can be overridden by creating `SecureAuditor.local.ini` in the project directory
 
 Sample output
 

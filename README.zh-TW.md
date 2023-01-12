@@ -17,7 +17,7 @@
 - 輸出格式為 Markdown
 - [本地化](https://learn.microsoft.com/powershell/module/microsoft.powershell.core/about/about_script_internationalization)
 - 可擴充的[規則](./rules/)
-- 可覆寫的配置 (`SecureAuditor.local.ini`)
+- 可覆寫的[配置](./SecureAuditor.ini)
 
 ## 安裝
 
@@ -42,7 +42,7 @@ git pull
 .\SecureAuditor.ps1
 ```
 
-> 可透過在專案目錄建立 `SecureAuditor.local.ini` 來覆寫 `SecureAuditor.local.ini` 的對應配置
+> 可透過在專案目錄建立 `SecureAuditor.local.ini` 來覆寫 `SecureAuditor.ini` 的對應配置
 
 範例輸出
 
