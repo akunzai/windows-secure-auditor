@@ -28,6 +28,6 @@ function Test($config) {
     }
     Write-Output "`n## $($i18n.SoftwareInstallation)`n"
     foreach ($event in $events) {
-        Write-Output "- $($event.Message)"
+        Write-Output "- $($event.Message.Trim())"
     }
 }
