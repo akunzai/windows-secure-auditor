@@ -1,0 +1,23 @@
+# This file comes from:
+# https://github.com/PowerShell/PowerShell/blob/master/.editorconfig
+
+# Top-most EditorConfig file
+root = true
+
+[*]
+charset = utf-8
+# indent_size intentionally not specified in this section
+indent_style = space
+insert_final_newline = true
+
+# PowerShell
+[*.{ps1,psd1,psm1}]
+indent_size = 4
+
+# JSON
+[*.json]
+indent_size = 2
+
+# Markdown
+[*.md]
+indent_size = 2

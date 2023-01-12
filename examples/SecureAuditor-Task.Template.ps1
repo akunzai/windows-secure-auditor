@@ -3,9 +3,9 @@ $to = 'to@example.com'
 $sendGridApiKey = $env:SENDGRID_API_KEY
 
 if (-not [string]::IsNullOrWhiteSpace($sendGridApiKey)) {
-	$mailerPath = [IO.Path]::Combine($PSScriptRoot, './SecureAuditor-SendGrid.ps1')
-	& $mailerPath -From $from -To $to -ApiKey $sendGridApiKey
-	return
+    $mailerPath = [IO.Path]::Combine($PSScriptRoot, './SecureAuditor-SendGrid.ps1')
+    & $mailerPath -From $from -To $to -ApiKey $sendGridApiKey
+    return
 }
 
 $smtpServer = 'smtp.example.com'
