@@ -16,7 +16,7 @@ function Test($config) {
         return
     }
     $days = [int]::Parse($config.SoftwareInstallation.Days) * -1
-    $maxEvents = [int]::Parse($config.Login.MaxEvents)
+    $maxEvents = [int]::Parse($config.SoftwareInstallation.MaxEvents)
     # https://learn.microsoft.com/powershell/scripting/samples/creating-get-winevent-queries-with-filterhashtable
     $events = Get-WinEvent -FilterHashtable @{ 
         LogName   = 'Application'
