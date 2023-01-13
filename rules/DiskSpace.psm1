@@ -15,7 +15,7 @@ if ($PSUICulture -ne 'en-US') {
 function Test($config) {
     Write-Output "`n## $($i18n.DiskSpace)`n"
     # https://learn.microsoft.com/windows/win32/cimwin32prov/win32-logicaldisk
-    $logicalDisks = Get-WmiObject -Query "SELECT * FROM Win32_LogicalDisk Where Size > 0"
+    $logicalDisks = Get-CimInstance -Query "SELECT * FROM Win32_LogicalDisk Where Size > 0"
     $exclude = $config.DiskSpace.Exclude
     $maxUsage = $config.DiskSpace.MaxUsage
     foreach ($logicalDisk in $logicalDisks) {
