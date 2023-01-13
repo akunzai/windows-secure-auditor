@@ -1,4 +1,4 @@
-$i18n = Data {
+﻿$i18n = Data {
     # culture="en-US"
     ConvertFrom-StringData @'
     NetworkTimeSync = Network Time Sync

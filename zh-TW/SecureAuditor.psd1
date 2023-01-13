@@ -1,4 +1,4 @@
-# culture="zh-TW"
+﻿# culture="zh-TW"
 ConvertFrom-StringData -StringData @'
 RequireAdministrator = 需要管理者權限
 SkipRule = 略過規則

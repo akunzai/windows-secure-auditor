@@ -1,4 +1,4 @@
-# culture="zh-TW"
+﻿# culture="zh-TW"
 ConvertFrom-StringData -StringData @'
 PasswordHistorySize = 密碼維護的歷程記錄長度
 PasswordPolicy = 密碼原則

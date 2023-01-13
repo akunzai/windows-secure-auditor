@@ -1,4 +1,4 @@
-if ($PSVersionTable.PSVersion.Major -lt 6) {
+﻿if ($PSVersionTable.PSVersion.Major -lt 6) {
     # Progress bar can significantly impact cmdlet performance
     # https://github.com/PowerShell/PowerShell/issues/2138
     $ProgressPreference = 'SilentlyContinue'

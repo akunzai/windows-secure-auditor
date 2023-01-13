@@ -1,4 +1,4 @@
-$from = 'from@example.com'
+﻿$from = 'from@example.com'
 $to = 'to@example.com'
 $sendGridApiKey = $env:SENDGRID_API_KEY
 
