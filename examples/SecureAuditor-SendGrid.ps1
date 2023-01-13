@@ -41,15 +41,27 @@ if ($UseSmtp) {
 }
 
 # https://docs.sendgrid.com/api-reference/mail-send/mail-send
+[mailaddress]$fromMail = $From
 $parameters = @{
     subject          = $subject
     content          = @(@{ type = 'text/plain'; value = $body })
-    from             = @{ email = $From }
-    personalizations = New-Object System.Collections.ArrayList
+    from             = @{ email = $fromMail.Address }
+    personalizations = @(
+        @{ to = @() }
+    )
+}
+
+if (![string]::IsNullOrWhiteSpace($fromaddr.DisplayName)) {
+    $parameters.from.name = $fromaddr.DisplayName
 }
 
 foreach ($email in $To) {
-    [void]$parameters.personalizations.Add(@{ to = @( @{ email = $email } ) })
+    [mailaddress]$toMail = $email
+    $recipient = @{ email = $toMail.Address }
+    if (![string]::IsNullOrWhiteSpace($toMail.DisplayName)) {
+        $recipient.name = $toMail.DisplayName
+    }
+    $parameters.personalizations[0].to += @($recipient)
 }
 
 $json = $parameters | ConvertTo-Json -Depth 4 -Compress
