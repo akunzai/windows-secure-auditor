@@ -27,7 +27,7 @@ function Test($config) {
         $product = Get-MpComputerStatus -ErrorAction SilentlyContinue
         if ($null -ne $product) {
             Write-Output "`n## $($i18n.Antivirus)`n"
-            Write-CheckList $product.AntivirusEnabled "$($i18n.Installed): Windows Defender $($product.AMProductVersion)"
+            Write-CheckList $product.AntivirusEnabled "$($i18n.Installed): Microsoft Defender $($product.AMProductVersion)"
             Write-CheckList (-not $product.DefenderSignaturesOutOfDate) ("$($i18n.UpdatedStatus): {0:yyyy-MM-dd'T'HH:mm:ssK} - $($product.AntivirusSignatureVersion)" -f $product.AntivirusSignatureLastUpdated)
             return
         }

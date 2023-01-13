@@ -66,7 +66,7 @@ Sample output
 
 ## Antivirus
 
-- [x] Installed: Windows Defender 4.18.2211.5
+- [x] Installed: Microsoft Defender 4.18.2211.5
 - [x] Updated Status: 2023-01-03T09:30:00+08:00 - 1.381.1994.0
 
 ## Default Account
