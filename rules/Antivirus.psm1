@@ -1,4 +1,4 @@
-$i18n = Data {
+﻿$i18n = Data {
     # culture="en-US"
     ConvertFrom-StringData @'
     Antivirus = Antivirus
@@ -16,7 +16,7 @@ function Test($config) {
     if ($osInfo.ProductType -ne 1) {
         # Windows Server
         # https://help.eset.com/efsw/9.0/en-US/work_wmi_provider_data.html
-        $product = Get-WmiObject ESET_Product -namespace 'root\ESET' -ErrorAction SilentlyContinue
+        $product = Get-CimInstance -Namespace root/ESET -ClassName ESET_Product -ErrorAction SilentlyContinue
         if ($null -ne $product) {
             Write-Output "`n## $($i18n.Antivirus)`n"
             Write-CheckList $true "$($i18n.Installed): $($product.Name) $($product.Version)"

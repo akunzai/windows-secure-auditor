@@ -1,4 +1,4 @@
-# https://learn.microsoft.com/powershell/scripting/developer/module/how-to-write-a-powershell-module-manifest
+﻿# https://learn.microsoft.com/powershell/scripting/developer/module/how-to-write-a-powershell-module-manifest
 
 @{
 

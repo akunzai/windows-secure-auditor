@@ -1,4 +1,4 @@
-# culture="zh-TW"
+﻿# culture="zh-TW"
 ConvertFrom-StringData -StringData @'
 Create = 建立
 Delete = 刪除

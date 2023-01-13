@@ -1,4 +1,4 @@
-# culture="zh-TW"
+﻿# culture="zh-TW"
 ConvertFrom-StringData -StringData @'
 Count = 計次
 EventId = 事件識別碼

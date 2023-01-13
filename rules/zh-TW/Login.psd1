@@ -1,4 +1,4 @@
-# culture="zh-TW"
+﻿# culture="zh-TW"
 ConvertFrom-StringData -StringData @'
 Login = 登入
 LoginFailed = 登入失敗

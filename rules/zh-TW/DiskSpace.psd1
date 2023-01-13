@@ -1,4 +1,4 @@
-# culture="zh-TW"
+﻿# culture="zh-TW"
 ConvertFrom-StringData -StringData @'
 DiskSpace = 磁碟空間
 FreeSpace = 可用空間
