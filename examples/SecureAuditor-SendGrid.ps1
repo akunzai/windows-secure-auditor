@@ -27,9 +27,11 @@ $body = & $auditorPath | Out-String
 
 $config = Get-IniContent -file ([IO.Path]::Combine($PSScriptRoot, '../SecureAuditor.ini'))
 $config = Get-IniContent -file ([IO.Path]::Combine($PSScriptRoot, '../SecureAuditor.local.ini')) -ini $config
-$attachmentPath = $config.FileIntegrityMonitoring.BaselinePath
-if (-not [IO.Path]::IsPathRooted($attachmentPath)) {
-    $attachmentPath = [IO.Path]::Combine($PSScriptRoot, '..', $attachmentPath)
+if (-not [string]::IsNullOrWhiteSpace($config.FileIntegrityMonitoring.Paths)) {
+    $attachmentPath = $config.FileIntegrityMonitoring.BaselinePath
+    if (-not [IO.Path]::IsPathRooted($attachmentPath)) {
+        $attachmentPath = [IO.Path]::Combine($PSScriptRoot, '..', $attachmentPath)
+    }
 }
 
 if ($UseSmtp) {
@@ -47,7 +49,7 @@ if ($UseSmtp) {
         UseSsl     = $true
         Credential = $credential
     }
-    if (Test-Path -Path $attachmentPath -ErrorAction SilentlyContinue) {
+    if ($null -ne $attachmentPath -and (Test-Path -Path $attachmentPath -ErrorAction SilentlyContinue)) {
         $parameters.Add('Attachments', $attachmentPath)
     }
     Send-MailMessage @parameters
@@ -63,14 +65,13 @@ $parameters = @{
     personalizations = @(
         @{ to = @() }
     )
-    attachments      = @()
 }
 
 if (![string]::IsNullOrWhiteSpace($fromaddr.DisplayName)) {
     $parameters.from.name = $fromaddr.DisplayName
 }
 
-if (Test-Path -Path $attachmentPath -ErrorAction SilentlyContinue) {
+if ($null -ne $attachmentPath -and (Test-Path -Path $attachmentPath -ErrorAction SilentlyContinue)) {
     $filename = [IO.Path]::GetFileName($attachmentPath)
     # https://github.com/PowerShell/PowerShell/issues/14537
     $bytes = if ($PSVersionTable.PSEdition -eq 'Core') {
@@ -80,7 +81,7 @@ if (Test-Path -Path $attachmentPath -ErrorAction SilentlyContinue) {
         Get-Content -Path $attachmentPath -Encoding Byte
     }
     $content = [convert]::ToBase64String($bytes)
-    $parameters.attachments += @(@{
+    $parameters.attachments = @(@{
             content  = $content
             type     = 'text/csv'
             filename = $filename

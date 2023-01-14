@@ -42,11 +42,13 @@ if ($credential -ne $null) {
 }
 $config = Get-IniContent -file ([IO.Path]::Combine($PSScriptRoot, '../SecureAuditor.ini'))
 $config = Get-IniContent -file ([IO.Path]::Combine($PSScriptRoot, '../SecureAuditor.local.ini')) -ini $config
-$attachmentPath = $config.FileIntegrityMonitoring.BaselinePath
-if (-not [IO.Path]::IsPathRooted($attachmentPath)) {
-    $attachmentPath = [IO.Path]::Combine($PSScriptRoot, '..', $attachmentPath)
+if (-not [string]::IsNullOrWhiteSpace($config.FileIntegrityMonitoring.Paths)) {
+    $attachmentPath = $config.FileIntegrityMonitoring.BaselinePath
+    if (-not [IO.Path]::IsPathRooted($attachmentPath)) {
+        $attachmentPath = [IO.Path]::Combine($PSScriptRoot, '..', $attachmentPath)
+    }
 }
-if (Test-Path -Path $attachmentPath -ErrorAction SilentlyContinue) {
+if ($null -ne $attachmentPath -and (Test-Path -Path $attachmentPath -ErrorAction SilentlyContinue)) {
     $parameters.Add('Attachments', $attachmentPath)
 }
 Send-MailMessage @parameters
