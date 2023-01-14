@@ -18,6 +18,9 @@ if ($PSUICulture -ne 'en-US') {
 }
 
 function Test($config) {
+    if ([string]::IsNullOrWhiteSpace($config.FileIntegrityMonitoring.Paths)) {
+        return
+    }
     $paths = $config.FileIntegrityMonitoring.Paths -split ',\s*'
     if ($paths.Count -eq 0) {
         return
