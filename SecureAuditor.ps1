@@ -27,17 +27,23 @@ $config = Get-IniContent -file ([IO.Path]::Combine($PSScriptRoot, 'SecureAuditor
 
 # System Information
 Write-Output "## $($i18n.SystemInfo)`n"
-$props = $config.ComputerInfo.Properties -split ',\s*'
-$info = Get-ComputerInfo -Property $props
-foreach ($prop in $props) {
-    if ($prop -eq 'OsHotFixes' -and $info.OsHotFixes.Count -gt 0) {
-        Write-Output "- OsHotFixes:"
-        foreach ($hotFix in $info.OsHotFixes) {
-            Write-Output "  - $($hotFix.HotFixID): $($hotFix.InstalledOn) $($hotFix.Description)"
+
+if ($PSVersionTable.PSEdition -eq 'Core' -and $PSVersionTable.Platform -ne 'Win32NT') {
+    Write-Output "- $(& uname -a)"
+}
+else {
+    $props = $config.ComputerInfo.Properties -split ',\s*'
+    $info = Get-ComputerInfo -Property $props
+    foreach ($prop in $props) {
+        if ($prop -eq 'OsHotFixes' -and $info.OsHotFixes.Count -gt 0) {
+            Write-Output "- OsHotFixes:"
+            foreach ($hotFix in $info.OsHotFixes) {
+                Write-Output "  - $($hotFix.HotFixID): $($hotFix.InstalledOn) $($hotFix.Description)"
+            }
+            continue;
         }
-        continue;
+        Write-Output "- $($prop): $($info.$prop)"
     }
-    Write-Output "- $($prop): $($info.$prop)"
 }
 
 # Test Rules

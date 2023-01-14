@@ -12,6 +12,11 @@ if ($PSUICulture -ne 'en-US') {
 }
 
 function Test($config) {
+    if ($PSVersionTable.PSEdition -eq 'Core' -and $PSVersionTable.Platform -ne 'Win32NT') {
+        $ruleName = [System.IO.Path]::GetFileNameWithoutExtension($PSCommandPath)
+        Write-UnsupportedPlatform($ruleName)
+        return
+    }
     Write-Output "`n## $($i18n.DefaultAccount)`n"
     $userNames = $config.DefaultAccount.LocalUserNames -split ',\s*'
     foreach ($userName in $userNames) {

@@ -1,8 +1,9 @@
 ﻿$i18n = Data {
     # culture="en-US"
     ConvertFrom-StringData @'
-	RequireAdministrator = Require Administrator
-	SkipRule = Skip rule
+    RequireAdministrator = Require Administrator
+    SkipRule = Skip rule
+    UnsupportedPlatform = Unsupported Platform
 '@
 }
 
@@ -47,6 +48,10 @@ function IsLocalAdministrator() {
 
 function Write-RequireAdministrator($ruleName) {
     Write-Host "`n> $($i18n.SkipRule): $($ruleName) ($($i18n.RequireAdministrator)) ..."
+}
+
+function Write-UnsupportedPlatform($ruleName) {
+    Write-Host "`n> $($i18n.SkipRule): $($ruleName) ($($i18n.UnsupportedPlatform)) ..."
 }
 
 function Write-CheckList([bool]$pass, [string]$item) {

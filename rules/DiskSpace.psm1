@@ -13,6 +13,11 @@ if ($PSUICulture -ne 'en-US') {
 }
 
 function Test($config) {
+    if ($PSVersionTable.PSEdition -eq 'Core' -and $PSVersionTable.Platform -ne 'Win32NT') {
+        $ruleName = [System.IO.Path]::GetFileNameWithoutExtension($PSCommandPath)
+        Write-UnsupportedPlatform($ruleName)
+        return
+    }
     Write-Output "`n## $($i18n.DiskSpace)`n"
     # https://learn.microsoft.com/windows/win32/cimwin32prov/win32-logicaldisk
     $logicalDisks = Get-CimInstance -Query "SELECT * FROM Win32_LogicalDisk Where Size > 0"

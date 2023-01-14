@@ -10,15 +10,19 @@ if ($PSUICulture -ne 'en-US') {
 }
 
 function Test($config) {
+    $ruleName = [System.IO.Path]::GetFileNameWithoutExtension($PSCommandPath)
+    if ($PSVersionTable.PSEdition -eq 'Core' -and $PSVersionTable.Platform -ne 'Win32NT') {
+        Write-UnsupportedPlatform($ruleName)
+        return
+    }
     if (-not (IsLocalAdministrator)) {
-        $ruleName = [System.IO.Path]::GetFileNameWithoutExtension($PSCommandPath)
         Write-RequireAdministrator($ruleName)
         return
     }
     $days = [int]::Parse($config.Shutdown.Days) * -1
     $maxEvents = [int]::Parse($config.Shutdown.MaxEvents)
     # https://learn.microsoft.com/powershell/scripting/samples/creating-get-winevent-queries-with-filterhashtable
-    $events = Get-WinEvent -FilterHashtable @{ 
+    $events = Get-WinEvent -FilterHashtable @{
         LogName   = 'System'
         Id        = 41, 1074, 1076, 6008
         StartTime = (get-date).AddDays($days)
