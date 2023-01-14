@@ -11,6 +11,11 @@ if ($PSUICulture -ne 'en-US') {
 }
 
 function Test($config) {
+    if ($PSVersionTable.PSEdition -eq 'Core' -and $PSVersionTable.Platform -ne 'Win32NT') {
+        $ruleName = [System.IO.Path]::GetFileNameWithoutExtension($PSCommandPath)
+        Write-UnsupportedPlatform($ruleName)
+        return
+    }
     Write-Output "`n## $($i18n.NetworkTimeSync)`n"
     # https://learn.microsoft.com/windows-server/networking/windows-time-service/windows-time-service-tools-and-settings
     $pinfo = New-Object System.Diagnostics.ProcessStartInfo

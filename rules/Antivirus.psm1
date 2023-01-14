@@ -12,6 +12,11 @@ if ($PSUICulture -ne 'en-US') {
 }
 
 function Test($config) {
+    if ($PSVersionTable.PSEdition -eq 'Core' -and $PSVersionTable.Platform -ne 'Win32NT') {
+        $ruleName = [System.IO.Path]::GetFileNameWithoutExtension($PSCommandPath)
+        Write-UnsupportedPlatform($ruleName)
+        return
+    }
     $osInfo = Get-CimInstance -ClassName Win32_OperatingSystem
     if ($osInfo.ProductType -ne 1) {
         # Windows Server

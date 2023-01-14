@@ -11,6 +11,11 @@ if ($PSUICulture -ne 'en-US') {
 }
 
 function Test($config) {
+    if ($PSVersionTable.PSEdition -eq 'Core' -and $PSVersionTable.Platform -ne 'Win32NT') {
+        $ruleName = [System.IO.Path]::GetFileNameWithoutExtension($PSCommandPath)
+        Write-UnsupportedPlatform($ruleName)
+        return
+    }
     $days = [int]::Parse($config.IdleAccount.Days) * -1
     $idleCheckpoint = (get-date).AddDays($days)
     # https://learn.microsoft.com/powershell/module/microsoft.powershell.localaccounts/get-localuser

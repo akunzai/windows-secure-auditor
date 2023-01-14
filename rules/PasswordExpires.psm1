@@ -11,6 +11,11 @@ if ($PSUICulture -ne 'en-US') {
 }
 
 function Test($config) {
+    if ($PSVersionTable.PSEdition -eq 'Core' -and $PSVersionTable.Platform -ne 'Win32NT') {
+        $ruleName = [System.IO.Path]::GetFileNameWithoutExtension($PSCommandPath)
+        Write-UnsupportedPlatform($ruleName)
+        return
+    }
     # https://learn.microsoft.com/powershell/module/microsoft.powershell.localaccounts/get-localuser
     $users = Get-LocalUser | Where-Object { $_.Enabled -and $null -eq $_.PasswordExpires }
     $exclude = $config.PasswordExpires.Exclude;

@@ -13,14 +13,18 @@ if ($PSUICulture -ne 'en-US') {
 }
 
 function Test($config) {
+    $ruleName = [System.IO.Path]::GetFileNameWithoutExtension($PSCommandPath)
+    if ($PSVersionTable.PSEdition -eq 'Core' -and $PSVersionTable.Platform -ne 'Win32NT') {
+        Write-UnsupportedPlatform($ruleName)
+        return
+    }
     if (-not (IsLocalAdministrator)) {
-        $ruleName = [System.IO.Path]::GetFileNameWithoutExtension($PSCommandPath)
         Write-RequireAdministrator($ruleName)
         return
     }
     $days = [int]::Parse($config.Login.Days) * -1
     # https://learn.microsoft.com/windows/security/threat-protection/auditing/basic-audit-logon-events
-    $events = Get-WinEvent -FilterHashtable @{ 
+    $events = Get-WinEvent -FilterHashtable @{
         LogName   = 'Security'
         Id        = 4624, 4625
         StartTime = (Get-Date).AddDays($days)
