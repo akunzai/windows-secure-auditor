@@ -47,7 +47,7 @@ git pull
 Sample output
 
 ````markdown
-# Windows Secure Auditor: 0.9.1
+# Windows Secure Auditor: 0.10.0
 
 ## System Information
 
@@ -92,6 +92,23 @@ Unable to open the Server service performance object. The first four bytes (DWOR
 ```log
 An TLS 1.2 connection request was received from a remote client application, but none of the cipher suites supported by the client application are supported by the server. The TLS connection request has failed.
 ```
+
+## File Integrity Monitoring
+
+### Added
+
+- D:\Backup\website.2023-01-03.zip | Last Modified: 2023-01-03T16:00:00Z, Size(Bytes): 512, Hash(SHA256): E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855
+
+### Deleted
+
+- D:\Backup\website.2022-12-26.zip | Last Modified: 2022-12-26T16:00:00Z, Size(Bytes): 256, Hash(SHA256): EDEAAFF3F1774AD2888673770C6D64097E391BC362D7D6FB34982DDF0EFD18CB
+
+### Modified
+
+- D:\WebSites\example.com\web.config
+  - Last Modified: 2023-01-02T16:00:00Z => 2023-01-3T16:00:00Z
+  - Size(Bytes): 128 => 129
+  - Hash(SHA256): EDEAAFF3F1774AD2888673770C6D64097E391BC362D7D6FB34982DDF0EFD18CB => E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855
 
 ## Idle Account
 
@@ -144,9 +161,9 @@ Poll Interval: 6 (64s)
 
 - 2023-01-03T08:30:00+08:00 | The system has rebooted without cleanly shutting down first.
 - 2023-01-03T23:00:00+08:00 | The process C:\Windows\system32\svchost.exe (DEMO) has initiated the restart of computer DEMO on behalf of user NT AUTHORITY\SYSTEM for the following reason: Operating System: Service pack (Planned)
- Reason Code: 0x80020010
- Shutdown Type: restart
- Comment:
+  Reason Code: 0x80020010
+  Shutdown Type: restart
+  Comment:
 
 ## User Account Management
 

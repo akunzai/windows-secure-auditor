@@ -25,18 +25,32 @@ $subject = "Secure Audit Report for $env:COMPUTERNAME"
 $auditorPath = [IO.Path]::Combine($PSScriptRoot, '../SecureAuditor.ps1')
 $body = & $auditorPath | Out-String
 
+$config = Get-IniContent -file ([IO.Path]::Combine($PSScriptRoot, '../SecureAuditor.ini'))
+$config = Get-IniContent -file ([IO.Path]::Combine($PSScriptRoot, '../SecureAuditor.local.ini')) -ini $config
+$attachmentPath = $config.FileIntegrityMonitoring.BaselinePath
+if (-not [IO.Path]::IsPathRooted($attachmentPath)) {
+    $attachmentPath = [IO.Path]::Combine($PSScriptRoot, '..', $attachmentPath)
+}
+
 if ($UseSmtp) {
     $password = $ApiKey | ConvertTo-SecureString -AsPlainText -Force
     $credential = New-Object Management.Automation.PSCredential ( 'apikey', $password )
     # https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/send-mailmessage
-    Send-MailMessage -From $From -To $To `
-        -Subject $subject `
-        -Body $body `
-        -Encoding UTF8 `
-        -SmtpServer smtp.sendgrid.net `
-        -Port 587 `
-        -UseSSL `
-        -Credential $credential
+    $parameters = @{
+        From       = $From
+        To         = $To
+        Subject    = $Subject
+        Body       = $body
+        Encoding   = 'UTF8'
+        SmtpServer = 'smtp.sendgrid.net'
+        Port       = 587
+        UseSsl     = $true
+        Credential = $credential
+    }
+    if (Test-Path -Path $attachmentPath -ErrorAction SilentlyContinue) {
+        $parameters.Add('Attachments', $attachmentPath)
+    }
+    Send-MailMessage @parameters
     return
 }
 
@@ -49,10 +63,28 @@ $parameters = @{
     personalizations = @(
         @{ to = @() }
     )
+    attachments      = @()
 }
 
 if (![string]::IsNullOrWhiteSpace($fromaddr.DisplayName)) {
     $parameters.from.name = $fromaddr.DisplayName
+}
+
+if (Test-Path -Path $attachmentPath -ErrorAction SilentlyContinue) {
+    $filename = [IO.Path]::GetFileName($attachmentPath)
+    # https://github.com/PowerShell/PowerShell/issues/14537
+    $bytes = if ($PSVersionTable.PSEdition -eq 'Core') {
+        Get-Content -Path $attachmentPath -AsByteStream
+    }
+    else {
+        Get-Content -Path $attachmentPath -Encoding Byte
+    }
+    $content = [convert]::ToBase64String($bytes)
+    $parameters.attachments += @(@{
+            content  = $content
+            type     = 'text/csv'
+            filename = $filename
+        })
 }
 
 foreach ($email in $To) {

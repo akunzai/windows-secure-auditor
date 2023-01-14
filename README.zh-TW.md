@@ -47,7 +47,7 @@ git pull
 範例輸出
 
 ````markdown
-# Windows Secure Auditor: 0.9.1
+# Windows Secure Auditor: 0.10.0
 
 ## 系統資訊
 
@@ -92,6 +92,23 @@ Unable to open the Server service performance object. The first four bytes (DWOR
 ```log
 An TLS 1.2 connection request was received from a remote client application, but none of the cipher suites supported by the client application are supported by the server. The TLS connection request has failed.
 ```
+
+## 檔案完整性監控
+
+### 已新增
+
+- D:\Backup\website.2023-01-03.zip | 最後異動時間: 2023-01-03T16:00:00Z, 大小(位元): 512, 雜湊值(SHA256): E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855
+
+### 已刪除
+
+- D:\Backup\website.2022-12-26.zip | 最後異動時間: 2022-12-26T16:00:00Z, 大小(位元): 256, 雜湊值(SHA256): EDEAAFF3F1774AD2888673770C6D64097E391BC362D7D6FB34982DDF0EFD18CB
+
+### 已異動
+
+- D:\WebSites\example.com\web.config
+  - 最後異動時間: 2023-01-02T16:00:00Z => 2023-01-3T16:00:00Z
+  - 大小(位元): 128 => 129
+  - 雜湊值(SHA256): EDEAAFF3F1774AD2888673770C6D64097E391BC362D7D6FB34982DDF0EFD18CB => E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855
 
 ## 閒置帳號
 
