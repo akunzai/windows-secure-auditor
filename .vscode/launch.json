@@ -1,0 +1,12 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "PowerShell: Launch Script",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}/SecureAuditor.ps1",
+      "args": []
+    }
+  ]
+}

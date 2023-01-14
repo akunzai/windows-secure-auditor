@@ -40,4 +40,13 @@ if ($useSsl -eq $true) {
 if ($credential -ne $null) {
     $parameters.Add('Credential', $Credential)
 }
+$config = Get-IniContent -file ([IO.Path]::Combine($PSScriptRoot, '../SecureAuditor.ini'))
+$config = Get-IniContent -file ([IO.Path]::Combine($PSScriptRoot, '../SecureAuditor.local.ini')) -ini $config
+$attachmentPath = $config.FileIntegrityMonitoring.BaselinePath
+if (-not [IO.Path]::IsPathRooted($attachmentPath)) {
+    $attachmentPath = [IO.Path]::Combine($PSScriptRoot, '..', $attachmentPath)
+}
+if (Test-Path -Path $attachmentPath -ErrorAction SilentlyContinue) {
+    $parameters.Add('Attachments', $attachmentPath)
+}
 Send-MailMessage @parameters
