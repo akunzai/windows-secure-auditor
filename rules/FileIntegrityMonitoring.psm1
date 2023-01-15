@@ -107,20 +107,19 @@ function Get-MonitoringFile($config) {
         # https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/get-filehash
         $hash = @{label = "Hash"; expression = { (Get-FileHash -Path $_.FullName -Algorithm $hashAlgorithm).Hash } }
         # https://learn.microsoft.com/powershell/module/microsoft.powershell.management/get-childitem
-        $item = Get-ChildItem @parameters | Select-Object $path, $lastModified, $size, $hash
+        $item = if ([string]::IsNullOrWhiteSpace($exclude)) {
+            Get-ChildItem @parameters | ForEach-Object { Write-Host "> $($i18n.Scanning): $($_.FullName) ..." ; $_ } | Select-Object $path, $lastModified, $size, $hash
+        }
+        else {
+            Get-ChildItem @parameters | Where-Object { $_.FullName -inotmatch $exclude } | ForEach-Object { Write-Host "> $($i18n.Scanning): $($_.FullName) ..." ; $_ } | Select-Object $path, $lastModified, $size, $hash
+        }
         $stopWatch.Stop()
         Write-Host "> $($i18n.ElapsedTime): $($stopWatch.Elapsed)"
         if ($null -eq $item) {
             continue
         }
         if ($item -is [array]) {
-            if (-not [string]::IsNullOrWhiteSpace($exclude)) {
-                $item = $item | Where-Object { $_.Path -inotmatch $exclude }
-            }
             [void]$items.AddRange($item)
-            continue
-        }
-        if (-not [string]::IsNullOrWhiteSpace($exclude) -and $item.Path -imatch $exclude) {
             continue
         }
         [void]$items.Add($item)
