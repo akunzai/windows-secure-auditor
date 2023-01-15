@@ -49,6 +49,9 @@ if (-not [string]::IsNullOrWhiteSpace($config.FileIntegrityMonitoring.Paths)) {
     }
 }
 if ($null -ne $attachmentPath -and (Test-Path -Path $attachmentPath -ErrorAction SilentlyContinue)) {
-    $parameters.Add('Attachments', $attachmentPath)
+    $filename = [IO.Path]::GetFileName($attachmentPath)
+    $zipPath = [IO.Path]::Combine([System.IO.Path]::GetTempPath(), ("{0}.zip" -f $filename))
+    Compress-Archive -LiteralPath $attachmentPath -DestinationPath $zipPath -CompressionLevel Optimal -Force
+    $parameters.Add('Attachments', $zipPath)
 }
 Send-MailMessage @parameters

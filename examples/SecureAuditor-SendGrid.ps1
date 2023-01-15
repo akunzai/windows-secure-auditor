@@ -50,7 +50,10 @@ if ($UseSmtp) {
         Credential = $credential
     }
     if ($null -ne $attachmentPath -and (Test-Path -Path $attachmentPath -ErrorAction SilentlyContinue)) {
-        $parameters.Add('Attachments', $attachmentPath)
+        $filename = [IO.Path]::GetFileName($attachmentPath)
+        $zipPath = [IO.Path]::Combine([System.IO.Path]::GetTempPath(), ("{0}.zip" -f $filename))
+        Compress-Archive -LiteralPath $attachmentPath -DestinationPath $zipPath -CompressionLevel Optimal -Force
+        $parameters.Add('Attachments', $zipPath)
     }
     Send-MailMessage @parameters
     return
@@ -73,18 +76,20 @@ if (![string]::IsNullOrWhiteSpace($fromaddr.DisplayName)) {
 
 if ($null -ne $attachmentPath -and (Test-Path -Path $attachmentPath -ErrorAction SilentlyContinue)) {
     $filename = [IO.Path]::GetFileName($attachmentPath)
+    $zipPath = ("{0}.zip" -f [System.IO.Path]::GetTempFileName())
+    Compress-Archive -LiteralPath $attachmentPath -DestinationPath $zipPath -CompressionLevel Optimal -Force
     # https://github.com/PowerShell/PowerShell/issues/14537
     $bytes = if ($PSVersionTable.PSEdition -eq 'Core') {
-        Get-Content -Path $attachmentPath -AsByteStream
+        Get-Content -Path $zipPath -AsByteStream
     }
     else {
-        Get-Content -Path $attachmentPath -Encoding Byte
+        Get-Content -Path $zipPath -Encoding Byte
     }
     $content = [convert]::ToBase64String($bytes)
     $parameters.attachments = @(@{
             content  = $content
-            type     = 'text/csv'
-            filename = $filename
+            type     = 'application/zip'
+            filename = "$($filename).zip"
         })
 }
 
