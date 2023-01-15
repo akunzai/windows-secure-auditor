@@ -39,7 +39,11 @@ git pull
 > 可在 [examples](./examples/) 看到更多使用範例
 
 ```powershell
+# 執行此腳本
 .\SecureAuditor.ps1
+
+# 執行此腳本時顯示詳細資訊
+. .\SecureAuditor.ps1 -Verbose
 ```
 
 > 可透過在專案目錄建立 `SecureAuditor.local.ini` 來覆寫 `SecureAuditor.ini` 的對應配置

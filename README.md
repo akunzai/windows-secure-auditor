@@ -39,7 +39,11 @@ git pull
 > See more sample usage in [examples](./examples/)
 
 ```powershell
+# run this script
 .\SecureAuditor.ps1
+
+# run this script with verbose messages
+. .\SecureAuditor.ps1 -Verbose
 ```
 
 > The corresponding configuration of `SecureAuditor.ini` can be overridden by creating `SecureAuditor.local.ini` in the project directory
