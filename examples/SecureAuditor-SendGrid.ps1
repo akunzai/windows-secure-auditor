@@ -1,4 +1,5 @@
-﻿param (
+﻿[CmdletBinding()]
+param (
     [Parameter(Mandatory)]
     [string]$From,
     [Parameter(Mandatory)]
