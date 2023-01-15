@@ -4,7 +4,8 @@
     [Parameter(Mandatory)]
     [string[]]$To,
     [string]$ApiKey,
-    [switch]$UseSmtp
+    [switch]$UseSmtp,
+    [switch]$UseSandbox
 )
 
 if ($PSVersionTable.PSVersion.Major -lt 6) {
@@ -72,6 +73,14 @@ $parameters = @{
 
 if (![string]::IsNullOrWhiteSpace($fromaddr.DisplayName)) {
     $parameters.from.name = $fromaddr.DisplayName
+}
+
+if ($UseSandbox) {
+    $parameters.mail_settings = @{
+        sandbox_mode = @{
+            enable = $true
+        }
+    }
 }
 
 if ($null -ne $attachmentPath -and (Test-Path -Path $attachmentPath -ErrorAction SilentlyContinue)) {
