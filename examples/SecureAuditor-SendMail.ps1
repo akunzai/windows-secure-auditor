@@ -20,7 +20,7 @@ if ($PSVersionTable.PSVersion.Major -lt 6) {
     $ProgressPreference = 'SilentlyContinue'
 }
 
-$subject = "Secure Audit Report for $env:COMPUTERNAME"
+$subject = ("Secure Audit Report for {0}" -f [environment]::MachineName)
 $auditorPath = [IO.Path]::Combine($PSScriptRoot, '../SecureAuditor.ps1')
 $body = & $auditorPath | Out-String
 
