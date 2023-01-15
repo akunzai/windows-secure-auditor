@@ -4,7 +4,7 @@
     [Parameter(Mandatory)]
     [string[]]$To,
     [string]$ApiKey,
-    [bool]$UseSmtp = $false
+    [switch]$UseSmtp
 )
 
 if ($PSVersionTable.PSVersion.Major -lt 6) {

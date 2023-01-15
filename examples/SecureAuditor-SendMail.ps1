@@ -7,7 +7,7 @@
     [string]$SmtpServer,
     [string]$Port = 25,
     [pscredential]$Credential = $null,
-    [bool]$UseSSL = $false
+    [switch]$UseSSL
 )
 
 if ($PSVersionTable.PSVersion.Major -lt 6) {
