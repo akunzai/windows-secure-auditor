@@ -1,4 +1,7 @@
-﻿$from = 'from@example.com'
+﻿[CmdletBinding()]
+param()
+
+$from = 'from@example.com'
 $to = 'to@example.com'
 $sendGridApiKey = $env:SENDGRID_API_KEY
 

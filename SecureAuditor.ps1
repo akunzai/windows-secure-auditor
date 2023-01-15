@@ -1,4 +1,7 @@
-﻿if ($PSVersionTable.PSVersion.Major -lt 6) {
+﻿[CmdletBinding()]
+param()
+
+if ($PSVersionTable.PSVersion.Major -lt 6) {
     # Progress bar can significantly impact cmdlet performance
     # https://github.com/PowerShell/PowerShell/issues/2138
     $ProgressPreference = 'SilentlyContinue'
@@ -10,7 +13,6 @@ $i18n = Data {
     # culture="en-US"
     ConvertFrom-StringData @'
 	SystemInfo = System Information
-	Error = Error
 '@
 }
 
@@ -62,7 +64,10 @@ Get-ChildItem -Path ([IO.Path]::Combine($PSScriptRoot, 'rules')) -Recurse -Filte
         $rule.Test($config)
     }
     catch {
-        Write-Host -ForegroundColor Red "`n> $($ruleName): $($i18n.Error)"
-        Write-Host -ForegroundColor Red "> $_"
+        $exception = $_.Exception;
+        if ($null -ne $exception.InnerException) {
+            $exception = $exception.InnerException
+        }
+        Write-Error -Message "> $($exception.Message)`n$($exception.ErrorRecord.InvocationInfo.PositionMessage)" -ErrorAction Stop
     }
 }

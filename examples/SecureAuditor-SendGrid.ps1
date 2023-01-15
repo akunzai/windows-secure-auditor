@@ -1,10 +1,12 @@
-﻿param (
+﻿[CmdletBinding()]
+param (
     [Parameter(Mandatory)]
     [string]$From,
     [Parameter(Mandatory)]
     [string[]]$To,
     [string]$ApiKey,
-    [bool]$UseSmtp = $false
+    [switch]$UseSmtp,
+    [switch]$UseSandbox
 )
 
 if ($PSVersionTable.PSVersion.Major -lt 6) {
@@ -21,7 +23,7 @@ if ([string]::IsNullOrWhiteSpace($ApiKey) -and -not [string]::IsNullOrWhiteSpace
     $ApiKey = $env:SENDGRID_API_KEY
 }
 
-$subject = "Secure Audit Report for $env:COMPUTERNAME"
+$subject = ("Secure Audit Report for {0}" -f [environment]::MachineName)
 $auditorPath = [IO.Path]::Combine($PSScriptRoot, '../SecureAuditor.ps1')
 $body = & $auditorPath | Out-String
 
@@ -74,6 +76,14 @@ if (![string]::IsNullOrWhiteSpace($fromaddr.DisplayName)) {
     $parameters.from.name = $fromaddr.DisplayName
 }
 
+if ($UseSandbox) {
+    $parameters.mail_settings = @{
+        sandbox_mode = @{
+            enable = $true
+        }
+    }
+}
+
 if ($null -ne $attachmentPath -and (Test-Path -Path $attachmentPath -ErrorAction SilentlyContinue)) {
     $filename = [IO.Path]::GetFileName($attachmentPath)
     $zipPath = ("{0}.zip" -f [System.IO.Path]::GetTempFileName())
@@ -104,9 +114,8 @@ foreach ($email in $To) {
 
 $json = $parameters | ConvertTo-Json -Depth 4 -Compress
 
-Invoke-WebRequest -UseBasicParsing `
-    -Uri https://api.sendgrid.com/v3/mail/send `
-    -ContentType "application/json" `
+Invoke-WebRequest -Method POST -Uri 'https://api.sendgrid.com/v3/mail/send' `
     -Headers @{ Authorization = "Bearer $ApiKey" } `
-    -Method POST `
-    -Body $json
+    -ContentType 'application/json; charset=UTF-8' `
+    -Body $json `
+    -UseBasicParsing
