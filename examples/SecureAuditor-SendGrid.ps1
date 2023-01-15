@@ -113,9 +113,8 @@ foreach ($email in $To) {
 
 $json = $parameters | ConvertTo-Json -Depth 4 -Compress
 
-Invoke-WebRequest -UseBasicParsing `
-    -Uri https://api.sendgrid.com/v3/mail/send `
-    -ContentType "application/json" `
+Invoke-WebRequest -Method POST -Uri 'https://api.sendgrid.com/v3/mail/send' `
     -Headers @{ Authorization = "Bearer $ApiKey" } `
-    -Method POST `
-    -Body $json
+    -ContentType 'application/json; charset=UTF-8' `
+    -Body $json `
+    -UseBasicParsing
