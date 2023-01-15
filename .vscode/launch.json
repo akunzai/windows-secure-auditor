@@ -2,11 +2,18 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "PowerShell: Launch Script",
+      "name": "PowerShell: Launch SecureAuditor.ps1",
       "type": "PowerShell",
       "request": "launch",
       "script": "${workspaceFolder}/SecureAuditor.ps1",
-      "args": []
+      "args": ["-Verbose"]
+    },
+    {
+      "name": "PowerShell: Launch SecureAuditor-Task.ps1",
+      "type": "PowerShell",
+      "request": "launch",
+      "script": "${workspaceFolder}/examples/SecureAuditor-Task.ps1",
+      "args": ["-Verbose"]
     }
   ]
 }
