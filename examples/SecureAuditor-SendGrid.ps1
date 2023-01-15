@@ -107,6 +107,6 @@ $json = $parameters | ConvertTo-Json -Depth 4 -Compress
 Invoke-WebRequest -UseBasicParsing `
     -Uri https://api.sendgrid.com/v3/mail/send `
     -ContentType "application/json" `
-    -Headers @{ Authorization = "Bearer $apiKey" } `
+    -Headers @{ Authorization = "Bearer $ApiKey" } `
     -Method POST `
     -Body $json
