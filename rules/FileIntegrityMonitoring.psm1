@@ -106,7 +106,7 @@ function Get-MonitoringFile($config) {
         $size = @{label = "Size"; expression = { $_.Length } }
         # https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/get-filehash
         $hash = @{label = "Hash"; expression = { (Get-FileHash -Path $_.FullName -Algorithm $hashAlgorithm).Hash } }
-        $verbose = $PSCmdlet.MyInvocation.BoundParameters.ContainsKey("Verbose") -and $PSCmdlet.MyInvocation.BoundParameters["Verbose"] -eq $true
+        $verbose = $null -ne $PSCmdlet -and $PSCmdlet.MyInvocation.BoundParameters.ContainsKey("Verbose") -and $PSCmdlet.MyInvocation.BoundParameters["Verbose"] -eq $true
         # https://learn.microsoft.com/powershell/module/microsoft.powershell.management/get-childitem
         $item = if ([string]::IsNullOrWhiteSpace($exclude)) {
             Get-ChildItem @parameters | ForEach-Object { Write-Verbose "> $($i18n.Scanning): $($_.FullName) ..." -Verbose:$verbose ; $_ } | Select-Object $path, $lastModified, $size, $hash
