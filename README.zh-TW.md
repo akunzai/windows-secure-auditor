@@ -57,7 +57,7 @@ git pull
 
 - OSName: Microsoft Windows Server 2019 Datacenter
 - OsVersion: 10.0.17763
-- OsLocale: en-US
+- OsLocale: zh-TW
 - OsLocalDateTime: 01/04/2023 00:00:00
 - TimeZone: (UTC+08:00) Taipei
 - OsUpTime: 10.04:26:15.1008481
