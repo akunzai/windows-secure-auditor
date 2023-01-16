@@ -7,9 +7,7 @@
     Hash = Hash
     LastModified = Last Modified
     Modified = Modified
-    Scanning = Scanning
     SizeInBytes = Size(Bytes)
-    ElapsedTime = Elapsed time
 '@
 }
 
@@ -107,10 +105,10 @@ function Get-MonitoringFile($config) {
         }
         $stopWatch.Restart()
         if ($fsInfo -is [System.IO.FileInfo]) {
-            Write-Verbose "> $($i18n.Scanning): $($fsInfo.FullName) ..." -Verbose:$verbose
+            Write-Verbose "Hashing: $($fsInfo.FullName) ..." -Verbose:$verbose
             $item = $fsInfo | Select-Object $path, $lastModified, $size, $hash
             $stopWatch.Stop()
-            Write-Verbose "> $($i18n.ElapsedTime): $($stopWatch.Elapsed)" -Verbose:$verbose
+            Write-Verbose "Elapsed: $($stopWatch.Elapsed)" -Verbose:$verbose
             [void]$items.Add($item)
             continue
         }
@@ -123,13 +121,13 @@ function Get-MonitoringFile($config) {
             ErrorAction = 'SilentlyContinue'
         }
         $item = if ([string]::IsNullOrWhiteSpace($exclude)) {
-            Get-ChildItem @parameters | ForEach-Object { Write-Verbose "> $($i18n.Scanning): $($_.FullName) ..." -Verbose:$verbose ; $_ } | Select-Object $path, $lastModified, $size, $hash
+            Get-ChildItem @parameters | ForEach-Object { Write-Verbose "Hashing: $($_.FullName) ..." -Verbose:$verbose ; $_ } | Select-Object $path, $lastModified, $size, $hash
         }
         else {
-            Get-ChildItem @parameters | Where-Object { $_.FullName -inotmatch $exclude } | ForEach-Object { Write-Verbose "> $($i18n.Scanning): $($_.FullName) ..." -Verbose:$verbose ; $_ } | Select-Object $path, $lastModified, $size, $hash
+            Get-ChildItem @parameters | Where-Object { $_.FullName -inotmatch $exclude } | ForEach-Object { Write-Verbose "Hashing: $($_.FullName) ..." -Verbose:$verbose ; $_ } | Select-Object $path, $lastModified, $size, $hash
         }
         $stopWatch.Stop()
-        Write-Verbose "> $($i18n.ElapsedTime): $($stopWatch.Elapsed)" -Verbose:$verbose
+        Write-Verbose "Elapsed: $($stopWatch.Elapsed)" -Verbose:$verbose
         if ($null -eq $item) {
             continue
         }
