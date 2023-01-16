@@ -91,9 +91,30 @@ function Get-MonitoringFile($config) {
     $hashAlgorithm = $config.FileIntegrityMonitoring.HashAlgorithm
     $items = [System.Collections.ArrayList]::new()
     $stopWatch = [System.Diagnostics.Stopwatch]::new()
+    $verbose = $null -ne $PSCmdlet -and $PSCmdlet.MyInvocation.BoundParameters.ContainsKey("Verbose") -and $PSCmdlet.MyInvocation.BoundParameters["Verbose"] -eq $true
+    $path = @{label = "Path"; expression = { $_.FullName } }
+    $lastModified = @{label = "LastModified"; expression = { ("{0:yyyy-MM-dd'T'HH:mm:ssK}" -f $_.LastWriteTimeUtc) } }
+    $size = @{label = "Size"; expression = { $_.Length } }
+    # https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/get-filehash
+    $hash = @{label = "Hash"; expression = { (Get-FileHash -Path $_.FullName -Algorithm $hashAlgorithm).Hash } }
     foreach ($monitoringPath in $monitoringPaths) {
+        $fsInfo = Get-Item $monitoringPath -Force -ErrorAction SilentlyContinue
+        if ($null -eq $fsInfo) {
+            continue
+        }
+        if ([string]::IsNullOrWhiteSpace($exclude) -and $fsInfo.FullName -imatch $exclude) {
+            continue
+        }
         $stopWatch.Restart()
-        Write-Host "> $($i18n.Scanning): $($monitoringPath) ..."
+        if ($fsInfo -is [System.IO.FileInfo]) {
+            Write-Verbose "> $($i18n.Scanning): $($fsInfo.FullName) ..." -Verbose:$verbose
+            $item = $fsInfo | Select-Object $path, $lastModified, $size, $hash
+            $stopWatch.Stop()
+            Write-Verbose "> $($i18n.ElapsedTime): $($stopWatch.Elapsed)" -Verbose:$verbose
+            [void]$items.Add($item)
+            continue
+        }
+        # https://learn.microsoft.com/powershell/module/microsoft.powershell.management/get-childitem
         $parameters = @{
             Path        = $monitoringPath
             File        = $true
@@ -101,13 +122,6 @@ function Get-MonitoringFile($config) {
             Recurse     = $true
             ErrorAction = 'SilentlyContinue'
         }
-        $path = @{label = "Path"; expression = { $_.FullName } }
-        $lastModified = @{label = "LastModified"; expression = { ("{0:yyyy-MM-dd'T'HH:mm:ssK}" -f $_.LastWriteTimeUtc) } }
-        $size = @{label = "Size"; expression = { $_.Length } }
-        # https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/get-filehash
-        $hash = @{label = "Hash"; expression = { (Get-FileHash -Path $_.FullName -Algorithm $hashAlgorithm).Hash } }
-        $verbose = $null -ne $PSCmdlet -and $PSCmdlet.MyInvocation.BoundParameters.ContainsKey("Verbose") -and $PSCmdlet.MyInvocation.BoundParameters["Verbose"] -eq $true
-        # https://learn.microsoft.com/powershell/module/microsoft.powershell.management/get-childitem
         $item = if ([string]::IsNullOrWhiteSpace($exclude)) {
             Get-ChildItem @parameters | ForEach-Object { Write-Verbose "> $($i18n.Scanning): $($_.FullName) ..." -Verbose:$verbose ; $_ } | Select-Object $path, $lastModified, $size, $hash
         }
@@ -115,7 +129,7 @@ function Get-MonitoringFile($config) {
             Get-ChildItem @parameters | Where-Object { $_.FullName -inotmatch $exclude } | ForEach-Object { Write-Verbose "> $($i18n.Scanning): $($_.FullName) ..." -Verbose:$verbose ; $_ } | Select-Object $path, $lastModified, $size, $hash
         }
         $stopWatch.Stop()
-        Write-Host "> $($i18n.ElapsedTime): $($stopWatch.Elapsed)"
+        Write-Verbose "> $($i18n.ElapsedTime): $($stopWatch.Elapsed)" -Verbose:$verbose
         if ($null -eq $item) {
             continue
         }
