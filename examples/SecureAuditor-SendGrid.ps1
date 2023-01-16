@@ -26,6 +26,12 @@ if ([string]::IsNullOrWhiteSpace($ApiKey) -and -not [string]::IsNullOrWhiteSpace
 $subject = ("Secure Audit Report for {0}" -f [environment]::MachineName)
 $auditorPath = [IO.Path]::Combine($PSScriptRoot, '../SecureAuditor.ps1')
 $body = & $auditorPath | Out-String
+$isHtml = $false
+if (Get-Command 'ConvertFrom-Markdown' -ErrorAction SilentlyContinue) {
+    # https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/convertfrom-markdown
+    $body = ($body | ConvertFrom-Markdown).Html
+    $isHtml = $true
+}
 
 $config = Get-IniContent -file ([IO.Path]::Combine($PSScriptRoot, '../SecureAuditor.ini'))
 $config = Get-IniContent -file ([IO.Path]::Combine($PSScriptRoot, '../SecureAuditor.local.ini')) -ini $config
@@ -51,6 +57,9 @@ if ($UseSmtp) {
         UseSsl     = $true
         Credential = $credential
     }
+    if ($isHtml) {
+        $parameters.Add("BodyAsHtml", $true)
+    }
     if ($null -ne $attachmentPath -and (Test-Path -Path $attachmentPath -ErrorAction SilentlyContinue)) {
         $filename = [IO.Path]::GetFileName($attachmentPath)
         $zipPath = [IO.Path]::Combine([System.IO.Path]::GetTempPath(), ("{0}.zip" -f $filename))
@@ -65,7 +74,10 @@ if ($UseSmtp) {
 [mailaddress]$fromMail = $From
 $parameters = @{
     subject          = $subject
-    content          = @(@{ type = 'text/plain'; value = $body })
+    content          = @(@{
+            type  = if ($isHtml) { 'text/html' } else { 'text/plain' };
+            value = $body
+        })
     from             = @{ email = $fromMail.Address }
     personalizations = @(
         @{ to = @() }

@@ -24,6 +24,12 @@ if ($PSVersionTable.PSVersion.Major -lt 6) {
 $subject = ("Secure Audit Report for {0}" -f [environment]::MachineName)
 $auditorPath = [IO.Path]::Combine($PSScriptRoot, '../SecureAuditor.ps1')
 $body = & $auditorPath | Out-String
+$isHtml = $false
+if (Get-Command 'ConvertFrom-Markdown' -ErrorAction SilentlyContinue) {
+    # https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/convertfrom-markdown
+    $body = ($body | ConvertFrom-Markdown).Html
+    $isHtml = $true
+}
 
 # https://learn.microsoft.com/powershell/module/microsoft.powershell.utility/send-mailmessage
 $parameters = @{
@@ -40,6 +46,9 @@ if ($useSsl -eq $true) {
 }
 if ($credential -ne $null) {
     $parameters.Add('Credential', $Credential)
+}
+if ($isHtml) {
+    $parameters.Add("BodyAsHtml", $true)
 }
 $config = Get-IniContent -file ([IO.Path]::Combine($PSScriptRoot, '../SecureAuditor.ini'))
 $config = Get-IniContent -file ([IO.Path]::Combine($PSScriptRoot, '../SecureAuditor.local.ini')) -ini $config
