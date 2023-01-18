@@ -100,7 +100,7 @@ function Get-MonitoringFile($config) {
         if ($null -eq $fsInfo) {
             continue
         }
-        if ([string]::IsNullOrWhiteSpace($exclude) -and $fsInfo.FullName -imatch $exclude) {
+        if (-not [string]::IsNullOrWhiteSpace($exclude) -and $fsInfo.FullName -imatch $exclude) {
             continue
         }
         $stopWatch.Restart()

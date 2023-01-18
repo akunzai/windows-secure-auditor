@@ -84,7 +84,7 @@ $parameters = @{
     )
 }
 
-if (![string]::IsNullOrWhiteSpace($fromaddr.DisplayName)) {
+if (-not [string]::IsNullOrWhiteSpace($fromaddr.DisplayName)) {
     $parameters.from.name = $fromaddr.DisplayName
 }
 
@@ -118,7 +118,7 @@ if ($null -ne $attachmentPath -and (Test-Path -Path $attachmentPath -ErrorAction
 foreach ($email in $To) {
     [mailaddress]$toMail = $email
     $recipient = @{ email = $toMail.Address }
-    if (![string]::IsNullOrWhiteSpace($toMail.DisplayName)) {
+    if (-not [string]::IsNullOrWhiteSpace($toMail.DisplayName)) {
         $recipient.name = $toMail.DisplayName
     }
     $parameters.personalizations[0].to += @($recipient)
