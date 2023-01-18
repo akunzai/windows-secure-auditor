@@ -27,6 +27,6 @@ Register-ScheduledTask -TaskName SecureAuditor `
 -RunLevel Highest `
 -Action (New-ScheduledTaskAction `
  -Execute $pwsh `
- -Argument "-NoProfile -ExecutionPolicy Bypass -File ""$taskPath""" `
+ -Argument "-NoProfile -NonInteractive -ExecutionPolicy Bypass -File ""$taskPath""" `
  )
 ```
