@@ -128,7 +128,7 @@ Poll Interval: 6 (64s)
   - /api/search: 1 Times
 - Status code: 404
   - /favicon.ico: 2 Time
-  - /login: 1 Times
+  - /robots.txt: 1 Times
 
 ## Default Account
 
