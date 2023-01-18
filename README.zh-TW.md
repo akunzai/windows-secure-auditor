@@ -51,7 +51,7 @@ git pull
 範例輸出
 
 ````markdown
-# Windows Secure Auditor: 0.11.1
+# Windows Secure Auditor: 0.12.0
 
 ## 系統資訊
 
@@ -73,29 +73,10 @@ git pull
 - [x] 已安裝: Microsoft Defender 4.18.2211.5
 - [x] 更新狀態: 2023-01-03T09:30:00+08:00 - 1.381.1994.0
 
-## 預設帳號
-
-- [x] Administrator: 不存在
-- [x] Guest: 已停用
-
 ## 磁碟空間
 
 - [x] C: 容量: 126.45 GB, 可用空間: 107.56 GB, 使用率: 14.94% <= 90%
 - [x] D: 容量: 8.00 GB, 可用空間: 6.96 GB, 使用率: 13.03% <= 90%
-
-## 事件記錄
-
-- 等級: 錯誤, 事件識別碼: 2004, 記錄檔: Application, 提供者: Microsoft-Windows-PerfNet, 計次: 1
-
-```log
-Unable to open the Server service performance object. The first four bytes (DWORD) of the Data section contains the status code.
-```
-
-- 等級: 錯誤, 事件識別碼: 36874, 記錄檔: System, 提供者: Schannel, 計次: 25
-
-```log
-An TLS 1.2 connection request was received from a remote client application, but none of the cipher suites supported by the client application are supported by the server. The TLS connection request has failed.
-```
 
 ## 檔案完整性監控
 
@@ -114,17 +95,6 @@ An TLS 1.2 connection request was received from a remote client application, but
   - 大小(位元): 128 => 129
   - 雜湊值(SHA256): EDEAAFF3F1774AD2888673770C6D64097E391BC362D7D6FB34982DDF0EFD18CB => E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855
 
-## 閒置帳號
-
-- [ ] alice: 上次登入於 2021-01-01T09:10:00+08:00
-
-## 登入
-
-- bob: 登入成功
-  - 127.0.0.2: 7 次
-- bob: 登入失敗
-  - 127.0.0.3: 1 次
-
 ## 網路校時
 
 - [x] Windows 時間同步服務已啟動
@@ -141,10 +111,6 @@ An TLS 1.2 connection request was received from a remote client application, but
 輪詢間隔: 6 (64s)
 ```
 
-## 密碼逾期
-
-- [ ] WDeployAdmin: 密碼永不逾期
-
 ## 密碼原則
 
 - [x] 密碼最短使用期限(天): 1 >= 1
@@ -156,10 +122,47 @@ An TLS 1.2 connection request was received from a remote client application, but
 
 - [ ] Security Intelligence Update for Microsoft Defender Antivirus - KB2267602 (Version 1.381.1969.0)
 
-## 軟體安裝
+## 失敗的 HTTP 請求
 
-- Product: windows_exporter -- Installation completed successfully.
-- Product: Bonjour -- Removal completed successfully.
+- 狀態碼: 500
+  - /api/search: 1 次
+- 狀態碼: 404
+  - /favicon.ico: 2 次
+  - /login: 1 次
+
+## 預設帳號
+
+- [x] Administrator: 不存在
+- [x] Guest: 已停用
+
+## 閒置帳號
+
+- [ ] alice: 上次登入於 2021-01-01T09:10:00+08:00
+
+## 密碼逾期
+
+- [ ] WDeployAdmin: 密碼永不逾期
+
+## 事件記錄
+
+- 等級: 錯誤, 事件識別碼: 2004, 記錄檔: Application, 提供者: Microsoft-Windows-PerfNet, 計次: 1
+
+```log
+Unable to open the Server service performance object. The first four bytes (DWORD) of the Data section contains the status code.
+```
+
+- 等級: 錯誤, 事件識別碼: 36874, 記錄檔: System, 提供者: Schannel, 計次: 25
+
+```log
+An TLS 1.2 connection request was received from a remote client application, but none of the cipher suites supported by the client application are supported by the server. The TLS connection request has failed.
+```
+
+## 登入
+
+- bob: 登入成功
+  - 127.0.0.2: 7 次
+- bob: 登入失敗
+  - 127.0.0.3: 1 次
 
 ## 系統關機
 
@@ -168,6 +171,11 @@ An TLS 1.2 connection request was received from a remote client application, but
  理由代碼: 0x80020010
  關機類型: 重新啟動
  註解:
+
+## 軟體安裝
+
+- Product: windows_exporter -- Installation completed successfully.
+- Product: Bonjour -- Removal completed successfully.
 
 ## 使用者帳號管理
 
