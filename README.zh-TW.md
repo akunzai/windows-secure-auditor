@@ -128,7 +128,7 @@ git pull
   - /api/search: 1 次
 - 狀態碼: 404
   - /favicon.ico: 2 次
-  - /login: 1 次
+  - /robots.txt: 1 次
 
 ## 預設帳號
 

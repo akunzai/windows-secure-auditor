@@ -29,16 +29,17 @@ function Test($config) {
     $days = [int]::Parse($config.FailedHttpRequests.Days) * -1
     $fromDate = $today.AddDays($days)
     $failedRequestsForStatus = @{}
+    $verbose = $null -ne $PSCmdlet -and $PSCmdlet.MyInvocation.BoundParameters.ContainsKey("Verbose") -and $PSCmdlet.MyInvocation.BoundParameters["Verbose"] -eq $true
     foreach ($logFile in $logFiles) {
-        $logs = Get-Content $logFile | Select-Object -skip 3 | Foreach-Object { $_ -replace '#Fields: ', '' } | ConvertFrom-Csv -Delimiter ' ' | Where-Object sc-status -gt '399' | Group-Object -Property sc-status, cs-uri-stem
+        Write-Verbose "Parsing: $($logFile) ..." -Verbose:$verbose
+        $logs = Get-Content $logFile | Select-Object -skip 3 | Foreach-Object { $_ -replace '#Fields: ', '' } | ConvertFrom-Csv -Delimiter ' ' `
+        | Where-Object { $_.date -ne 'date' -and $_.'sc-status' -gt '399' } `
+        | Where-Object { $fromDate -gt [datetime]::Parse($_.date, [System.Globalization.CultureInfo]::InvariantCulture, [System.Globalization.DateTimeStyles]::AdjustToUniversal).Add([timespan]::Parse($_.time, [System.Globalization.CultureInfo]::InvariantCulture)) }`
+        | Group-Object -Property sc-status, cs-uri-stem
         if ($logs.Count -eq 0) {
             continue
         }
         foreach ($log in $logs) {
-            $dateTime = [datetime]::Parse($log.Group[0].date, [System.Globalization.CultureInfo]::InvariantCulture, [System.Globalization.DateTimeStyles]::AdjustToUniversal).Add([timespan]::Parse($log.Group[0].time, [System.Globalization.CultureInfo]::InvariantCulture))
-            if ($null -ne $dateTime -and $dateTime -le $fromDate) {
-                continue
-            }
             $status = $log.Group[0].'sc-status'
             $url = $log.Group[0].'cs-uri-stem'
             if ($failedRequestsForStatus[$status] -isnot [hashtable]) {
@@ -77,7 +78,7 @@ function Get-LogFile($config) {
     }
     $items = [System.Collections.ArrayList]::new()
     $today = Get-Date
-    $days = [int]::Parse($config.FailedHttpRequests.Days)
+    $days = [int]::Parse($config.FailedHttpRequests.Days) + 1
     $dates = [System.Linq.Enumerable]::Range(0, $days) | ForEach-Object { $today.AddDays($_ * -1) }
     foreach ($webSite in $webSites) {
         $logBasePath = [IO.Path]::Combine($webSite.LogFile.Directory.Replace('%SystemDrive%', $env:SystemDrive), ("W3SVC{0}" -f $webSite.Id))
