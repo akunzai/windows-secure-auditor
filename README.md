@@ -51,7 +51,7 @@ git pull
 Sample output
 
 ````markdown
-# Windows Secure Auditor: 0.11.1
+# Windows Secure Auditor: 0.12.0
 
 ## System Information
 
@@ -73,29 +73,10 @@ Sample output
 - [x] Installed: Microsoft Defender 4.18.2211.5
 - [x] Updated Status: 2023-01-03T09:30:00+08:00 - 1.381.1994.0
 
-## Default Account
-
-- [x] Administrator: not found
-- [x] Guest: disabled
-
 ## Disk Space
 
 - [x] C: Size: 126.45 GB, FreeSpace: 107.56 GB, Usage: 14.94% <= 90%
 - [x] D: Size: 8.00 GB, FreeSpace: 6.96 GB, Usage: 13.03% <= 90%
-
-## Event Logs
-
-- Level: Error, Event ID: 2004, LogName: Application, ProviderName: Microsoft-Windows-PerfNet, Count: 1
-
-```log
-Unable to open the Server service performance object. The first four bytes (DWORD) of the Data section contains the status code.
-```
-
-- Level: Error, Event ID: 36874, LogName: System, ProviderName: Schannel, Count: 25
-
-```log
-An TLS 1.2 connection request was received from a remote client application, but none of the cipher suites supported by the client application are supported by the server. The TLS connection request has failed.
-```
 
 ## File Integrity Monitoring
 
@@ -114,17 +95,6 @@ An TLS 1.2 connection request was received from a remote client application, but
   - Size(Bytes): 128 => 129
   - Hash(SHA256): EDEAAFF3F1774AD2888673770C6D64097E391BC362D7D6FB34982DDF0EFD18CB => E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855
 
-## Idle Account
-
-- [ ] alice: last logon at 2021-01-01T09:10:00+08:00
-
-## Login
-
-- bob: login success
-  - 127.0.0.2: 7 Times
-- bob: login failed
-  - 127.0.0.3: 1 Times
-
 ## Network Time Sync
 
 - [x] Windows Time Service Started
@@ -141,10 +111,6 @@ Source: time.windows.com,0x8
 Poll Interval: 6 (64s)
 ```
 
-## Password Expires
-
-- [ ] WDeployAdmin: password never expires
-
 ## Password Policy
 
 - [x] Minimum password age(days): 1 >= 1
@@ -156,10 +122,47 @@ Poll Interval: 6 (64s)
 
 - [ ] Security Intelligence Update for Microsoft Defender Antivirus - KB2267602 (Version 1.381.1969.0)
 
-## Software Installation
+## Failed HTTP Requests
 
-- Product: windows_exporter -- Installation completed successfully.
-- Product: Bonjour -- Removal completed successfully.
+- Status code: 500
+  - /api/search: 1 Times
+- Status code: 404
+  - /favicon.ico: 2 Time
+  - /login: 1 Times
+
+## Default Account
+
+- [x] Administrator: not found
+- [x] Guest: disabled
+
+## Idle Account
+
+- [ ] alice: last logon at 2021-01-01T09:10:00+08:00
+
+## Password Expires
+
+- [ ] WDeployAdmin: password never expires
+
+## Event Logs
+
+- Level: Error, Event ID: 2004, LogName: Application, ProviderName: Microsoft-Windows-PerfNet, Count: 1
+
+```log
+Unable to open the Server service performance object. The first four bytes (DWORD) of the Data section contains the status code.
+```
+
+- Level: Error, Event ID: 36874, LogName: System, ProviderName: Schannel, Count: 25
+
+```log
+An TLS 1.2 connection request was received from a remote client application, but none of the cipher suites supported by the client application are supported by the server. The TLS connection request has failed.
+```
+
+## Login
+
+- bob: login success
+  - 127.0.0.2: 7 Times
+- bob: login failed
+  - 127.0.0.3: 1 Times
 
 ## Shutdown
 
@@ -168,6 +171,11 @@ Poll Interval: 6 (64s)
   Reason Code: 0x80020010
   Shutdown Type: restart
   Comment:
+
+## Software Installation
+
+- Product: windows_exporter -- Installation completed successfully.
+- Product: Bonjour -- Removal completed successfully.
 
 ## User Account Management
 
