@@ -34,7 +34,7 @@ function Test($config) {
         Write-Verbose "Parsing: $($logFile) ..." -Verbose:$verbose
         $logs = Get-Content $logFile | Select-Object -skip 3 | Foreach-Object { $_ -replace '#Fields: ', '' } | ConvertFrom-Csv -Delimiter ' ' `
         | Where-Object { $_.date -ne 'date' -and $_.'sc-status' -gt '399' } `
-        | Where-Object { $fromDate -gt [datetime]::Parse($_.date, [System.Globalization.CultureInfo]::InvariantCulture, [System.Globalization.DateTimeStyles]::AdjustToUniversal).Add([timespan]::Parse($_.time, [System.Globalization.CultureInfo]::InvariantCulture)) }`
+        | Where-Object { $fromDate -lt [datetime]::Parse($_.date, [System.Globalization.CultureInfo]::InvariantCulture, [System.Globalization.DateTimeStyles]::AdjustToUniversal).Add([timespan]::Parse($_.time, [System.Globalization.CultureInfo]::InvariantCulture)) } `
         | Group-Object -Property sc-status, cs-uri-stem
         if ($logs.Count -eq 0) {
             continue
