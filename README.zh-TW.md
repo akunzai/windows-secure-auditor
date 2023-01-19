@@ -51,7 +51,7 @@ git pull
 範例輸出
 
 ````markdown
-# Windows Secure Auditor: 0.12.1
+# Windows Secure Auditor: 0.12.2
 
 ## 系統資訊
 
@@ -125,10 +125,10 @@ git pull
 ## 失敗的 HTTP 請求
 
 - 狀態碼: 500
-  - /api/search: 1 次
+  - `/api/search?q=test`: 1 次
 - 狀態碼: 404
-  - /favicon.ico: 2 次
-  - /robots.txt: 1 次
+  - `/favicon.ico`: 2 次
+  - `/robots.txt`: 1 次
 
 ## 預設帳號
 
