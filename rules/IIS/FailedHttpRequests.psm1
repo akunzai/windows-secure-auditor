@@ -35,17 +35,21 @@ function Test($config) {
         $logs = Get-Content $logFile | Select-Object -skip 3 | Foreach-Object { $_ -replace '#Fields: ', '' } | ConvertFrom-Csv -Delimiter ' ' `
         | Where-Object { $_.date -ne 'date' -and $_.'sc-status' -gt '399' } `
         | Where-Object { $fromDate -lt [datetime]::Parse($_.date, [System.Globalization.CultureInfo]::InvariantCulture, [System.Globalization.DateTimeStyles]::AdjustToUniversal).Add([timespan]::Parse($_.time, [System.Globalization.CultureInfo]::InvariantCulture)) } `
-        | Group-Object -Property sc-status, cs-uri-stem
+        | Group-Object -Property sc-status, cs-uri-stem, cs-uri-query
         if ($logs.Count -eq 0) {
             continue
         }
         foreach ($log in $logs) {
             $status = $log.Group[0].'sc-status'
-            $url = $log.Group[0].'cs-uri-stem'
+            $uri = $log.Group[0].'cs-uri-stem'
+            $query = $log.Group[0].'cs-uri-query'
+            if ($null -ne $query -and $query -ne '-') {
+                $uri = ("{0}?{1}" -f $uri, $query)
+            }
             if ($failedRequestsForStatus[$status] -isnot [hashtable]) {
                 $failedRequestsForStatus[$status] = @{}
             }
-            $failedRequestsForStatus[$status][$url] = $log.Count;
+            $failedRequestsForStatus[$status][$uri] = $log.Count;
         }
     }
     if ($failedRequestsForStatus.Count -eq 0) {
@@ -56,12 +60,12 @@ function Test($config) {
     foreach ($status in $failedRequestsForStatus.Keys | Sort-Object -Descending) {
         Write-Output "- $($i18n.StatusCode): $($status)"
         $count = 0
-        foreach ($url in $failedRequestsForStatus[$status].Keys) {
+        foreach ($uri in $failedRequestsForStatus[$status].Keys) {
             if ($count -ge $maxRecords) {
                 break
             }
-            $times = $failedRequestsForStatus[$status][$url]
-            Write-Output "  - $($url): $($times) $($i18n.Times)"
+            $times = $failedRequestsForStatus[$status][$uri]
+            Write-Output "  - ``$($uri)``: $($times) $($i18n.Times)"
             $count += 1
         }
     }
