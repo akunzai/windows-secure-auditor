@@ -68,7 +68,7 @@ function Test($config) {
 }
 
 function Get-LogFile($config) {
-    Import-Module WebAdministration
+    Import-Module WebAdministration -ErrorAction SilentlyContinue
     if (-not (Get-Command 'Get-WebSite' -ErrorAction SilentlyContinue)) {
         return @()
     }
