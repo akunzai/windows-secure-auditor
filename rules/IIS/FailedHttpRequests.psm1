@@ -32,7 +32,7 @@ function Test($config) {
     $verbose = $null -ne $PSCmdlet -and $PSCmdlet.MyInvocation.BoundParameters.ContainsKey("Verbose") -and $PSCmdlet.MyInvocation.BoundParameters["Verbose"] -eq $true
     foreach ($logFile in $logFiles) {
         Write-Verbose "Parsing: $($logFile) ..." -Verbose:$verbose
-        $logs = Get-Content $logFile | Select-Object -skip 3 | Foreach-Object { $_ -replace '#Fields: ', '' } | ConvertFrom-Csv -Delimiter ' ' `
+        $logs = Get-Content $logFile | Select-Object -Skip 3 | Foreach-Object { $_ -replace '#Fields: ', '' } | ConvertFrom-Csv -Delimiter ' ' `
         | Where-Object { $_.date -ne 'date' -and $_.'sc-status' -gt '399' } `
         | Where-Object { $fromDate -lt [datetime]::Parse($_.date, [System.Globalization.CultureInfo]::InvariantCulture, [System.Globalization.DateTimeStyles]::AdjustToUniversal).Add([timespan]::Parse($_.time, [System.Globalization.CultureInfo]::InvariantCulture)) } `
         | Group-Object -Property sc-status, cs-uri-stem, cs-uri-query
@@ -59,14 +59,8 @@ function Test($config) {
     $maxRecords = [int]$config.FailedHttpRequests.MaxRecords
     foreach ($status in $failedRequestsForStatus.Keys | Sort-Object -Descending) {
         Write-Output "- $($i18n.StatusCode): $($status)"
-        $count = 0
-        foreach ($uri in $failedRequestsForStatus[$status].Keys) {
-            if ($count -ge $maxRecords) {
-                break
-            }
-            $times = $failedRequestsForStatus[$status][$uri]
-            Write-Output "  - ``$($uri)``: $($times) $($i18n.Times)"
-            $count += 1
+        foreach ($item in $failedRequestsForStatus[$status].GetEnumerator() | Sort-Object -Property Value -Descending | Select-Object -First $maxRecords) {
+            Write-Output "  - ``$($item.Key)``: $($item.Value) $($i18n.Times)"
         }
     }
 }
