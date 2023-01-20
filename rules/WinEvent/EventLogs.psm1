@@ -40,6 +40,7 @@ function Test($config) {
     Write-Output "`n## $($i18n.EventLogs)"
     $events = $events | Select-Object Id, Level, LevelDisplayName, LogName, Message, ProviderName | Sort-Object -Property Level, Id | Group-Object -Property Level, Id
     $maxEvents = [int]$config.EventLogs.MaxEvents
+    $maxMessageLength = [int]$config.EventLogs.MaxMessageLength
     $exclude = $config.EventLogs.Exclude
     $eventCount = 0
     foreach ($event in $events) {
@@ -60,7 +61,13 @@ function Test($config) {
         Write-Output "  - $($i18n.ProviderName): $($providerName)"
         Write-Output "  - $($i18n.Count): $($count)"
         if ($null -ne $message) {
-            Write-Output "`n``````log`n$($message.Trim())`n``````"
+            $message = $message.Trim()
+            if ($message.length -le $maxMessageLength) {
+                Write-Output ("`n``````log`n{0}`n``````" -f $message)
+            }
+            else {
+                Write-Output ("`n``````log`n{0}...`n``````" -f $message.SubString(0, $maxMessageLength))
+            }
         }
         $eventCount += 1
     }
