@@ -85,7 +85,7 @@ function Get-LogFile($config) {
     $days = [int]::Parse($config.FailedHttpRequests.Days) + 1
     $dates = [System.Linq.Enumerable]::Range(0, $days) | ForEach-Object { $today.AddDays($_ * -1) }
     foreach ($webSite in $webSites) {
-        $logBasePath = [IO.Path]::Combine($webSite.LogFile.Directory.Replace('%SystemDrive%', $env:SystemDrive), ("W3SVC{0}" -f $webSite.Id))
+        $logBasePath = [IO.Path]::Combine(($webSite.LogFile.Directory -replace '%SystemDrive%', $env:SystemDrive), ("W3SVC{0}" -f $webSite.Id))
         foreach ($date in $dates) {
             $logFilePath = [IO.Path]::Combine($logBasePath, ("u_ex{0:yyMMdd}.log" -f $date))
             if (Test-Path -Path $logFilePath -ErrorAction SilentlyContinue) {
