@@ -29,7 +29,7 @@ function Test($config) {
         }
         $usage = [Math]::Round((($logicalDisk.Size - $logicalDisk.FreeSpace) / $logicalDisk.Size) * 100, 2)
         Write-CheckList ($usage -le $maxUsage) `
-        ("$($logicalDisk.DeviceID) $($i18n.Size): {0:0.##} GB, $($i18n.FreeSpace): {1:0.##} GB, $($i18n.Usage): {2:0.##}% <= {3}%" `
+        ("$($logicalDisk.DeviceID) | $($i18n.Size): {0:0.##} GB | $($i18n.FreeSpace): {1:0.##} GB | $($i18n.Usage): {2:0.##}% <= {3}%" `
                 -f ($logicalDisk.Size / 1GB), ($logicalDisk.FreeSpace / 1GB), $usage, $maxUsage)
     }
 }

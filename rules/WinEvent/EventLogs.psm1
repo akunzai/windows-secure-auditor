@@ -55,7 +55,10 @@ function Test($config) {
         $message = $event.Group[0].Message
         $providerName = $event.Group[0].ProviderName
         $count = $event.Count;
-        Write-Output "`n- $($i18n.Level): $($level), $($i18n.EventId): $($eventId), $($i18n.LogName): $($logName), $($i18n.ProviderName): $($providerName), $($i18n.Count): $($count)"
+        Write-Output "`n- $($i18n.Level): $($level) | $($i18n.EventId): $($eventId)"
+        Write-Output "  - $($i18n.LogName): $($logName)"
+        Write-Output "  - $($i18n.ProviderName): $($providerName)"
+        Write-Output "  - $($i18n.Count): $($count)"
         if ($null -ne $message) {
             Write-Output "`n``````log`n$($message.Trim())`n``````"
         }

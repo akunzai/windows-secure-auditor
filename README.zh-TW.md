@@ -69,8 +69,8 @@ git pull
 
 ## 磁碟空間
 
-- [x] C: 容量: 126.45 GB, 可用空間: 107.56 GB, 使用率: 14.94% <= 90%
-- [x] D: 容量: 8.00 GB, 可用空間: 6.96 GB, 使用率: 13.03% <= 90%
+- [x] C: | 容量: 126.45 GB | 可用空間: 107.56 GB | 使用率: 14.94% <= 90%
+- [x] D: | 容量: 8.00 GB | 可用空間: 6.96 GB | 使用率: 13.03% <= 90%
 
 ## 檔案完整性監控
 
@@ -139,13 +139,19 @@ git pull
 
 ## 事件記錄
 
-- 等級: 錯誤, 事件識別碼: 2004, 記錄檔: Application, 提供者: Microsoft-Windows-PerfNet, 計次: 1
+- 等級: 錯誤 | 事件識別碼: 2004
+  - 記錄檔: Application
+  - 提供者: Microsoft-Windows-PerfNet
+  - 計次: 1
 
 ```log
 Unable to open the Server service performance object. The first four bytes (DWORD) of the Data section contains the status code.
 ```
 
-- 等級: 錯誤, 事件識別碼: 36874, 記錄檔: System, 提供者: Schannel, 計次: 25
+- 等級: 錯誤 | 事件識別碼: 36874
+  - 記錄檔: System
+  - 提供者: Schannel
+  - 計次: 25
 
 ```log
 An TLS 1.2 connection request was received from a remote client application, but none of the cipher suites supported by the client application are supported by the server. The TLS connection request has failed.
