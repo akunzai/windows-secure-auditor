@@ -16,6 +16,9 @@ if ($PSUICulture -ne 'en-US') {
 }
 
 function Test($config) {
+    if (-not [bool]$config.FileIntegrityMonitoring.Enabled) {
+        return
+    }
     if ([string]::IsNullOrWhiteSpace($config.FileIntegrityMonitoring.Paths)) {
         return
     }

@@ -35,7 +35,7 @@ if (Get-Command 'ConvertFrom-Markdown' -ErrorAction SilentlyContinue) {
 
 $config = Get-IniContent -file ([IO.Path]::Combine($PSScriptRoot, '../SecureAuditor.ini'))
 $config = Get-IniContent -file ([IO.Path]::Combine($PSScriptRoot, '../SecureAuditor.local.ini')) -ini $config
-if (-not [string]::IsNullOrWhiteSpace($config.FileIntegrityMonitoring.Paths)) {
+if ([bool]$config.FileIntegrityMonitoring.Enabled) {
     $attachmentPath = $config.FileIntegrityMonitoring.BaselinePath
     if (-not [IO.Path]::IsPathRooted($attachmentPath)) {
         $attachmentPath = [IO.Path]::Combine($PSScriptRoot, '..', $attachmentPath)
