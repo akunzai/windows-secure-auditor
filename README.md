@@ -119,10 +119,10 @@ Poll Interval: 6 (64s)
 ## Failed HTTP Requests
 
 - Status code: 500
-  - `/api/search?q=test`: 1 Times
+  - `/api/search?q=test`: 1 Time(s)
 - Status code: 404
-  - `/favicon.ico`: 2 Times
-  - `/robots.txt`: 1 Times
+  - `/favicon.ico`: 2 Time(s)
+  - `/robots.txt`: 1 Time(s)
 
 ## Default Account
 
@@ -154,9 +154,9 @@ An TLS 1.2 connection request was received from a remote client application, but
 ## Login
 
 - bob: login success
-  - 127.0.0.2: 7 Times
+  - 127.0.0.2: 7 Time(s)
 - bob: login failed
-  - 127.0.0.3: 1 Times
+  - 127.0.0.3: 1 Time(s)
 
 ## Shutdown
 
