@@ -51,7 +51,7 @@ git pull
 Sample output
 
 ````markdown
-# Windows Secure Auditor: 0.12.2
+# Windows Secure Auditor: 0.12.3
 
 ## System Information
 
@@ -61,12 +61,6 @@ Sample output
 - OsLocalDateTime: 01/04/2023 00:00:00
 - TimeZone: (UTC+08:00) Taipei
 - OsUpTime: 10.04:26:15.1008481
-- OsHotFixes:
-  - KB5020874: 12/25/2022 Update
-  - KB4486153: 12/24/2022 Update
-  - KB5012170: 12/24/2022 Security Update
-  - KB5021237: 12/11/2022 Security Update
-  - KB5020374: 12/11/2022 Security Update
 
 ## Antivirus
 
@@ -82,11 +76,11 @@ Sample output
 
 ### Added
 
-- D:\Backup\website.2023-01-03.zip | Last Modified: 2023-01-03T16:00:00Z, Size(Bytes): 512, Hash(SHA256): E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855
+- D:\Backup\website.2023-01-03.zip
 
 ### Deleted
 
-- D:\Backup\website.2022-12-26.zip | Last Modified: 2022-12-26T16:00:00Z, Size(Bytes): 256, Hash(SHA256): EDEAAFF3F1774AD2888673770C6D64097E391BC362D7D6FB34982DDF0EFD18CB
+- D:\Backup\website.2022-12-26.zip
 
 ### Modified
 
