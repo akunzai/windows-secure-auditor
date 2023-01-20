@@ -51,7 +51,7 @@ git pull
 Sample output
 
 ````markdown
-# Windows Secure Auditor: 0.12.4
+# Windows Secure Auditor: 0.12.5
 
 ## System Information
 
@@ -121,7 +121,7 @@ Poll Interval: 6 (64s)
 - Status code: 500
   - `/api/search?q=test`: 1 Times
 - Status code: 404
-  - `/favicon.ico`: 2 Time
+  - `/favicon.ico`: 2 Times
   - `/robots.txt`: 1 Times
 
 ## Default Account
