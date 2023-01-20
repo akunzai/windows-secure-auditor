@@ -26,8 +26,8 @@ function Test($config) {
         return
     }
     $today = Get-Date
-    $days = [int]::Parse($config.FailedHttpRequests.Days) * -1
-    $fromDate = $today.AddDays($days)
+    $days = [int]$config.FailedHttpRequests.Days
+    $fromDate = $today.AddDays($days * -1)
     $failedRequestsForStatus = @{}
     $verbose = $null -ne $PSCmdlet -and $PSCmdlet.MyInvocation.BoundParameters.ContainsKey("Verbose") -and $PSCmdlet.MyInvocation.BoundParameters["Verbose"] -eq $true
     foreach ($logFile in $logFiles) {
@@ -56,7 +56,7 @@ function Test($config) {
         return
     }
     Write-Output "`n## $($i18n.FailedHttpRequests)`n"
-    $maxRecords = [int]::Parse($config.FailedHttpRequests.MaxRecords)
+    $maxRecords = [int]$config.FailedHttpRequests.MaxRecords
     foreach ($status in $failedRequestsForStatus.Keys | Sort-Object -Descending) {
         Write-Output "- $($i18n.StatusCode): $($status)"
         $count = 0
@@ -82,10 +82,10 @@ function Get-LogFile($config) {
     }
     $items = [System.Collections.ArrayList]::new()
     $today = Get-Date
-    $days = [int]::Parse($config.FailedHttpRequests.Days) + 1
+    $days = [int]$config.FailedHttpRequests.Days + 1
     $dates = [System.Linq.Enumerable]::Range(0, $days) | ForEach-Object { $today.AddDays($_ * -1) }
     foreach ($webSite in $webSites) {
-        $logBasePath = [IO.Path]::Combine($webSite.LogFile.Directory.Replace('%SystemDrive%', $env:SystemDrive), ("W3SVC{0}" -f $webSite.Id))
+        $logBasePath = [IO.Path]::Combine(($webSite.LogFile.Directory -replace '%SystemDrive%', $env:SystemDrive), ("W3SVC{0}" -f $webSite.Id))
         foreach ($date in $dates) {
             $logFilePath = [IO.Path]::Combine($logBasePath, ("u_ex{0:yyMMdd}.log" -f $date))
             if (Test-Path -Path $logFilePath -ErrorAction SilentlyContinue) {

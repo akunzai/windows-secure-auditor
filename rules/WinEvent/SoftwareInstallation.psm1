@@ -19,13 +19,13 @@ function Test($config) {
         Write-RequireAdministrator($ruleName)
         return
     }
-    $days = [int]::Parse($config.SoftwareInstallation.Days) * -1
-    $maxEvents = [int]::Parse($config.SoftwareInstallation.MaxEvents)
+    $days = [int]$config.SoftwareInstallation.Days
+    $maxEvents = [int]$config.SoftwareInstallation.MaxEvents
     # https://learn.microsoft.com/powershell/scripting/samples/creating-get-winevent-queries-with-filterhashtable
     $events = Get-WinEvent -FilterHashtable @{
         LogName   = 'Application'
         Id        = 11707, 11724
-        StartTime = (get-date).AddDays($days)
+        StartTime = (get-date).AddDays($days * -1)
     } -MaxEvents $maxEvents -ErrorAction SilentlyContinue
     if ($events.Count -eq 0) {
         return

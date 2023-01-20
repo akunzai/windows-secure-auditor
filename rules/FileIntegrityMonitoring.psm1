@@ -16,6 +16,9 @@ if ($PSUICulture -ne 'en-US') {
 }
 
 function Test($config) {
+    if (-not [bool]$config.FileIntegrityMonitoring.Enabled) {
+        return
+    }
     if ([string]::IsNullOrWhiteSpace($config.FileIntegrityMonitoring.Paths)) {
         return
     }
@@ -44,7 +47,7 @@ function Test($config) {
     if ($null -eq $diff -or $diff.Count -eq 0) {
         return
     }
-    $maxRecords = [int]::Parse($config.FileIntegrityMonitoring.MaxRecords)
+    $maxRecords = [int]$config.FileIntegrityMonitoring.MaxRecords
     $hashAlgorithm = $config.FileIntegrityMonitoring.HashAlgorithm
     Write-Output "`n## $($i18n.FileIntegrityMonitoring)"
     $groupDiff = $diff | Group-Object -Property Path

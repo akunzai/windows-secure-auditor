@@ -22,12 +22,12 @@ function Test($config) {
         Write-RequireAdministrator($ruleName)
         return
     }
-    $days = [int]::Parse($config.Login.Days) * -1
+    $days = [int]$config.Login.Days
     # https://learn.microsoft.com/windows/security/threat-protection/auditing/basic-audit-logon-events
     $events = Get-WinEvent -FilterHashtable @{
         LogName   = 'Security'
         Id        = 4624, 4625
-        StartTime = (Get-Date).AddDays($days)
+        StartTime = (Get-Date).AddDays($days * -1)
     } -ErrorAction SilentlyContinue
     if ($events.Count -eq 0) {
         return
@@ -63,7 +63,7 @@ function Test($config) {
         return
     }
     Write-Output "`n## $($i18n.Login)`n"
-    $maxEvents = [int]::Parse($config.Login.MaxEvents)
+    $maxEvents = [int]$config.Login.MaxEvents
     $eventCount = 0
     :success foreach ($username in $loginSuccessForUser.Keys) {
         Write-Output "- $($username): $($i18n.LoginSuccess)"
