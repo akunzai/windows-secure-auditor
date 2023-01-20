@@ -4,7 +4,7 @@
     Login = Login
     LoginFailed = login failed
     LoginSuccess = login success
-    Times = Times
+    Times = Time(s)
 '@
 }
 

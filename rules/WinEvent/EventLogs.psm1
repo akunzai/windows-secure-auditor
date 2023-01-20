@@ -28,36 +28,48 @@ function Test($config) {
     $logNames = $config.EventLogs.LogNames -split ',\s*'
     $levels = $config.EventLogs.Levels -split ',\s*' | ForEach-Object { [int]$_ }
     $days = [int]$config.EventLogs.Days
+    $exclude = $config.EventLogs.Exclude
     # https://learn.microsoft.com/powershell/scripting/samples/creating-get-winevent-queries-with-filterhashtable
     $events = Get-WinEvent -FilterHashtable @{
         LogName   = $logNames
         Level     = $levels
         StartTime = (Get-Date).AddDays($days * -1)
     } -ErrorAction SilentlyContinue
+    if (-not [string]::IsNullOrWhiteSpace($exclude)) {
+        $events = $events | Where-Object { $_.Id -notmatch $exclude }
+    }
     if ($events.Count -eq 0) {
         return
     }
     Write-Output "`n## $($i18n.EventLogs)"
     $events = $events | Select-Object Id, Level, LevelDisplayName, LogName, Message, ProviderName | Sort-Object -Property Level, Id | Group-Object -Property Level, Id
     $maxEvents = [int]$config.EventLogs.MaxEvents
-    $exclude = $config.EventLogs.Exclude
+    $maxMessageLength = [int]$config.EventLogs.MaxMessageLength
     $eventCount = 0
     foreach ($event in $events) {
         if ($eventCount -ge $maxEvents) {
             break
         }
         $eventId = $event.Group[0].Id
-        if (-not [string]::IsNullOrWhiteSpace($exclude) -and $eventId -match $exclude) {
-            continue
-        }
         $level = $event.Group[0].LevelDisplayName
         $logName = $event.Group[0].LogName
         $message = $event.Group[0].Message
         $providerName = $event.Group[0].ProviderName
         $count = $event.Count;
-        Write-Output "`n- $($i18n.Level): $($level), $($i18n.EventId): $($eventId), $($i18n.LogName): $($logName), $($i18n.ProviderName): $($providerName), $($i18n.Count): $($count)"
+        Write-Output "`n- $($i18n.Level): $($level) | $($i18n.EventId): $($eventId)"
+        Write-Output "  - $($i18n.LogName): $($logName)"
+        Write-Output "  - $($i18n.ProviderName): $($providerName)"
+        Write-Output "  - $($i18n.Count): $($count)"
         if ($null -ne $message) {
-            Write-Output "`n``````log`n$($message.Trim())`n``````"
+            # remove special characters
+            # https://en.wikipedia.org/wiki/ANSI_escape_code
+            $message = $message.Trim() -replace '[\x1b]\[\d+([\d;]+)?m', ''
+            if ($message.length -le $maxMessageLength) {
+                Write-Output ("`n``````log`n{0}`n``````" -f $message)
+            }
+            else {
+                Write-Output ("`n``````log`n{0}...`n``````" -f $message.SubString(0, $maxMessageLength))
+            }
         }
         $eventCount += 1
     }

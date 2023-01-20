@@ -51,7 +51,7 @@ git pull
 Sample output
 
 ````markdown
-# Windows Secure Auditor: 0.12.5
+# Windows Secure Auditor: 0.12.6
 
 ## System Information
 
@@ -69,8 +69,8 @@ Sample output
 
 ## Disk Space
 
-- [x] C: Size: 126.45 GB, FreeSpace: 107.56 GB, Usage: 14.94% <= 90%
-- [x] D: Size: 8.00 GB, FreeSpace: 6.96 GB, Usage: 13.03% <= 90%
+- [x] C: | Size: 126.45 GB | FreeSpace: 107.56 GB | Usage: 14.94% <= 90%
+- [x] D: | Size: 8.00 GB | FreeSpace: 6.96 GB | Usage: 13.03% <= 90%
 
 ## File Integrity Monitoring
 
@@ -119,10 +119,10 @@ Poll Interval: 6 (64s)
 ## Failed HTTP Requests
 
 - Status code: 500
-  - `/api/search?q=test`: 1 Times
+  - `/api/search?q=test`: 1 Time(s)
 - Status code: 404
-  - `/favicon.ico`: 2 Times
-  - `/robots.txt`: 1 Times
+  - `/favicon.ico`: 2 Time(s)
+  - `/robots.txt`: 1 Time(s)
 
 ## Default Account
 
@@ -139,13 +139,19 @@ Poll Interval: 6 (64s)
 
 ## Event Logs
 
-- Level: Error, Event ID: 2004, LogName: Application, ProviderName: Microsoft-Windows-PerfNet, Count: 1
+- Level: Error | Event ID: 2004
+  - LogName: Application
+  - ProviderName: Microsoft-Windows-PerfNet
+  - Count: 1
 
 ```log
 Unable to open the Server service performance object. The first four bytes (DWORD) of the Data section contains the status code.
 ```
 
-- Level: Error, Event ID: 36874, LogName: System, ProviderName: Schannel, Count: 25
+- Level: Error | Event ID: 36874
+  - LogName: System
+  - ProviderName: Schannel
+  - Count: 25
 
 ```log
 An TLS 1.2 connection request was received from a remote client application, but none of the cipher suites supported by the client application are supported by the server. The TLS connection request has failed.
@@ -154,9 +160,9 @@ An TLS 1.2 connection request was received from a remote client application, but
 ## Login
 
 - bob: login success
-  - 127.0.0.2: 7 Times
+  - 127.0.0.2: 7 Time(s)
 - bob: login failed
-  - 127.0.0.3: 1 Times
+  - 127.0.0.3: 1 Time(s)
 
 ## Shutdown
 

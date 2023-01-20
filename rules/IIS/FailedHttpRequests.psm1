@@ -3,7 +3,7 @@
     ConvertFrom-StringData @'
     FailedHttpRequests = Failed HTTP Requests
     StatusCode = Status code
-    Times = Times
+    Times = Time(s)
 '@
 }
 
