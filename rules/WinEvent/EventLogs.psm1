@@ -68,7 +68,7 @@ function Test($config) {
                 Write-Output ("`n``````log`n{0}`n``````" -f $message)
             }
             else {
-                Write-Output ("`n``````log`n{0}...`n``````" -f $message.SubString(0, $maxMessageLength))
+                Write-Output ("`n``````log`n{0}...`n``````" -f $message.Substring(0, $maxMessageLength))
             }
         }
         $eventCount += 1
