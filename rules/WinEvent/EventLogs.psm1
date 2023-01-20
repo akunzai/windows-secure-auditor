@@ -61,7 +61,9 @@ function Test($config) {
         Write-Output "  - $($i18n.ProviderName): $($providerName)"
         Write-Output "  - $($i18n.Count): $($count)"
         if ($null -ne $message) {
-            $message = $message.Trim()
+            # remove special characters
+            # https://en.wikipedia.org/wiki/ANSI_escape_code
+            $message = $message.Trim() -replace '[\x1b]\[\d+([\d;]+)?m', ''
             if ($message.length -le $maxMessageLength) {
                 Write-Output ("`n``````log`n{0}`n``````" -f $message)
             }
