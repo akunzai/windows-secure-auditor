@@ -52,14 +52,14 @@ function Test($config) {
     if ($addedFiles.Count -gt 0) {
         Write-Output "`n### $($i18n.Added)`n"
         foreach ($file in $addedFiles) {
-            Write-Output "- $($file.Path) | $($i18n.LastModified): $($file.LastModified), $($i18n.SizeInBytes): $($file.Size), $($i18n.Hash)($($hashAlgorithm)): $($file.Hash)"
+            Write-Output "- $($file.Path)"
         }
     }
     $deletedFiles = $groupDiff | Where-Object { $_.Count -eq 1 -and $_.Group[0].SideIndicator -eq '<=' } | Select-Object -ExpandProperty Group -First $maxRecords
     if ($deletedFiles.Count -gt 0) {
         Write-Output "`n### $($i18n.Deleted)`n"
         foreach ($file in $deletedFiles) {
-            Write-Output "- $($file.Path) | $($i18n.LastModified): $($file.LastModified), $($i18n.SizeInBytes): $($file.Size), $($i18n.Hash)($($hashAlgorithm)): $($file.Hash)"
+            Write-Output "- $($file.Path)"
         }
     }
     $modifiedFiles = $groupDiff | Where-Object { $_.Count -eq 2 } | Select-Object -First $maxRecords
