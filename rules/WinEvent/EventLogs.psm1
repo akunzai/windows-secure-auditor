@@ -26,20 +26,20 @@ function Test($config) {
         return
     }
     $logNames = $config.EventLogs.LogNames -split ',\s*'
-    $levels = $config.EventLogs.Levels -split ',\s*' | ForEach-Object { [int]::Parse($_) }
-    $days = [int]::Parse($config.EventLogs.Days) * -1
+    $levels = $config.EventLogs.Levels -split ',\s*' | ForEach-Object { [int]$_ }
+    $days = [int]$config.EventLogs.Days
     # https://learn.microsoft.com/powershell/scripting/samples/creating-get-winevent-queries-with-filterhashtable
     $events = Get-WinEvent -FilterHashtable @{
         LogName   = $logNames
         Level     = $levels
-        StartTime = (Get-Date).AddDays($days)
+        StartTime = (Get-Date).AddDays($days * -1)
     } -ErrorAction SilentlyContinue
     if ($events.Count -eq 0) {
         return
     }
     Write-Output "`n## $($i18n.EventLogs)"
     $events = $events | Select-Object Id, Level, LevelDisplayName, LogName, Message, ProviderName | Sort-Object -Property Level, Id | Group-Object -Property Level, Id
-    $maxEvents = [int]::Parse($config.EventLogs.MaxEvents)
+    $maxEvents = [int]$config.EventLogs.MaxEvents
     $exclude = $config.EventLogs.Exclude
     $eventCount = 0
     foreach ($event in $events) {

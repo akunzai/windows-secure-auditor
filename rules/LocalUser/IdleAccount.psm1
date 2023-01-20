@@ -16,8 +16,8 @@ function Test($config) {
         Write-UnsupportedPlatform($ruleName)
         return
     }
-    $days = [int]::Parse($config.IdleAccount.Days) * -1
-    $idleCheckpoint = (get-date).AddDays($days)
+    $days = [int]$config.IdleAccount.Days
+    $idleCheckpoint = (get-date).AddDays($days * -1)
     # https://learn.microsoft.com/powershell/module/microsoft.powershell.localaccounts/get-localuser
     $users = Get-LocalUser | Where-Object { $_.Enabled -and $null -ne $_.LastLogon -and $idleCheckpoint -gt $_.LastLogon }
     $exclude = $config.IdleAccount.Exclude;

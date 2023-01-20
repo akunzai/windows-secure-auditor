@@ -47,7 +47,7 @@ function Test($config) {
     if ($null -eq $diff -or $diff.Count -eq 0) {
         return
     }
-    $maxRecords = [int]::Parse($config.FileIntegrityMonitoring.MaxRecords)
+    $maxRecords = [int]$config.FileIntegrityMonitoring.MaxRecords
     $hashAlgorithm = $config.FileIntegrityMonitoring.HashAlgorithm
     Write-Output "`n## $($i18n.FileIntegrityMonitoring)"
     $groupDiff = $diff | Group-Object -Property Path
