@@ -114,7 +114,7 @@ git pull
 
 ## 待安裝的 Windows 更新
 
-- [ ] Security Intelligence Update for Microsoft Defender Antivirus - KB2267602 (Version 1.381.1969.0)
+- [x] Security Intelligence Update for Microsoft Defender Antivirus - KB2267602 (Version 1.381.1969.0)
 
 ## 失敗的 HTTP 請求
 

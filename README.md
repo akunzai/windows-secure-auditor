@@ -114,7 +114,7 @@ Poll Interval: 6 (64s)
 
 ## Pending Windows Update
 
-- [ ] Security Intelligence Update for Microsoft Defender Antivirus - KB2267602 (Version 1.381.1969.0)
+- [x] Security Intelligence Update for Microsoft Defender Antivirus - KB2267602 (Version 1.381.1969.0)
 
 ## Failed HTTP Requests
 
