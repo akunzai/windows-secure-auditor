@@ -1,7 +1,7 @@
 ﻿$i18n = Data {
     # culture="en-US"
     ConvertFrom-StringData @'
-    NetworkTimeSync = Network Time Sync
+    NTP = Network Time Protocol
     WindowsTimeServiceStarted = Windows Time Service Started
 '@
 }
@@ -16,7 +16,7 @@ function Test($config) {
         Write-UnsupportedPlatform($ruleName)
         return
     }
-    Write-Output "`n## $($i18n.NetworkTimeSync)`n"
+    Write-Output "`n## $($i18n.NTP)`n"
     # https://learn.microsoft.com/windows-server/networking/windows-time-service/windows-time-service-tools-and-settings
     $pinfo = New-Object System.Diagnostics.ProcessStartInfo
     $pinfo.FileName = "w32tm"
