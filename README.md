@@ -51,7 +51,7 @@ git pull
 Sample output
 
 ````markdown
-# Windows Secure Auditor: 0.12.6
+# Windows Secure Auditor: 0.12.7
 
 ## System Information
 
@@ -69,8 +69,8 @@ Sample output
 
 ## Disk Space
 
-- [x] C: | Size: 126.45 GB | FreeSpace: 107.56 GB | Usage: 14.94% <= 90%
-- [x] D: | Size: 8.00 GB | FreeSpace: 6.96 GB | Usage: 13.03% <= 90%
+- [x] C | Used: 18.89 GB | Free: 107.56 GB | Usage: 14.94% <= 90%
+- [x] D | Used: 1.04 GB | Free: 6.96 GB | Usage: 13.03% <= 90%
 
 ## File Integrity Monitoring
 
