@@ -51,7 +51,7 @@ git pull
 範例輸出
 
 ````markdown
-# Windows Secure Auditor: 0.12.8
+# Windows Secure Auditor: 0.12.9
 
 ## 系統資訊
 
@@ -141,7 +141,7 @@ git pull
 
 - 等級: 錯誤 | 事件識別碼: 2004
   - 記錄檔: Application
-  - 提供者: Microsoft-Windows-PerfNet
+  - 來源: Microsoft-Windows-PerfNet
   - 計次: 1
 
 ```log
@@ -150,7 +150,7 @@ Unable to open the Server service performance object. The first four bytes (DWOR
 
 - 等級: 錯誤 | 事件識別碼: 36874
   - 記錄檔: System
-  - 提供者: Schannel
+  - 來源: Schannel
   - 計次: 25
 
 ```log

@@ -51,7 +51,7 @@ git pull
 Sample output
 
 ````markdown
-# Windows Secure Auditor: 0.12.8
+# Windows Secure Auditor: 0.12.9
 
 ## System Information
 
@@ -141,7 +141,7 @@ Poll Interval: 6 (64s)
 
 - Level: Error | Event ID: 2004
   - LogName: Application
-  - ProviderName: Microsoft-Windows-PerfNet
+  - Source: Microsoft-Windows-PerfNet
   - Count: 1
 
 ```log
@@ -150,7 +150,7 @@ Unable to open the Server service performance object. The first four bytes (DWOR
 
 - Level: Error | Event ID: 36874
   - LogName: System
-  - ProviderName: Schannel
+  - Source: Schannel
   - Count: 25
 
 ```log

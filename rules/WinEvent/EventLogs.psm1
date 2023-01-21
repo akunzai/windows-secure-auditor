@@ -7,7 +7,7 @@
     Level = Level
     LogName = LogName
     Message = Message
-    ProviderName = ProviderName
+    Source = Source
 '@
 }
 
@@ -54,11 +54,11 @@ function Test($config) {
         $level = $event.Group[0].LevelDisplayName
         $logName = $event.Group[0].LogName
         $message = $event.Group[0].Message
-        $providerName = $event.Group[0].ProviderName
+        $source = $event.Group[0].ProviderName
         $count = $event.Count;
         Write-Output "`n- $($i18n.Level): $($level) | $($i18n.EventId): $($eventId)"
         Write-Output "  - $($i18n.LogName): $($logName)"
-        Write-Output "  - $($i18n.ProviderName): $($providerName)"
+        Write-Output "  - $($i18n.Source): $($source)"
         Write-Output "  - $($i18n.Count): $($count)"
         if ($null -ne $message) {
             # remove special characters
