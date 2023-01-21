@@ -51,7 +51,7 @@ git pull
 範例輸出
 
 ````markdown
-# Windows Secure Auditor: 0.12.9
+# Windows Secure Auditor: 0.13.0
 
 ## 系統資訊
 
@@ -91,7 +91,8 @@ git pull
 
 ## 網路校時
 
-- [x] Windows 時間同步服務已啟動
+- [x] 網路校時服務已啟動
+- [x] 校時來源: time.windows.com
 
 ```log
 躍進式指示器: 0(沒有警告)
@@ -168,9 +169,9 @@ An TLS 1.2 connection request was received from a remote client application, but
 
 - 2023-01-03T08:30:00+08:00 | 系統已重新開機，但未先正常關機。若系統停止回應、當機或電力意外中斷，就可能會造成此錯誤。
 - 2023-01-03T23:00:00+08:00 | 處理程序 C:\Windows\system32\svchost.exe (DEMO)已代表使用者 NT AUTHORITY\SYSTEM 啟動電腦 DEMO 的電源關閉，原因如下: 作業系統: Service Pack (計劃之中)
- 理由代碼: 0x80020010
- 關機類型: 重新啟動
- 註解:
+  理由代碼: 0x80020010
+  關機類型: 重新啟動
+  註解:
 
 ## 軟體安裝
 
