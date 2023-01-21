@@ -1,8 +1,9 @@
 ﻿$i18n = Data {
     # culture="en-US"
     ConvertFrom-StringData @'
-	FiledToCheckUpdates = Failed to check Windows Update
+    CVE = CVE
     PendingUpdates = Pending Windows Update
+    RebootRequired = Reboot required
 '@
 }
 
@@ -19,17 +20,19 @@ function Test($config) {
     $updateSession = New-Object -ComObject Microsoft.Update.Session
     $updateSession.ClientApplicationID = 'Windows Secure Auditor'
     $updateSearcher = $updateSession.CreateUpdateSearcher()
-    try {
-        $result = $updateSearcher.Search('IsInstalled=0')
-        if ($result.updates.Count -eq 0) {
-            return;
-        }
-        Write-Output "`n## $($i18n.PendingUpdates)`n"
-        foreach ($update in $result.updates) {
-            Write-CheckList $false $update.Title
-        }
+    $result = $updateSearcher.Search('IsHidden=0 and IsInstalled=0')
+    if ($result.updates.Count -eq 0) {
+        return;
     }
-    catch {
-        Write-Host -ForegroundColor Red "> $($i18n.FiledToCheckUpdates): $_"
+    Write-Output "`n## $($i18n.PendingUpdates)`n"
+    foreach ($update in $result.updates) {
+        $pass = !($update.IsMandatory -and ($null -ne $update.MsrcSeverity -and $update.MsrcSeverity -eq 'Critical'))
+        Write-CheckList $pass $update.Title
+        if ($update.RebootRequired) {
+            Write-Output "  - $($i18n.RebootRequired)"
+        }
+        if ($null -ne $update.CveIDs -and $update.CveIDs.Count -gt 0) {
+            Write-Output "  - $($i18n.CVE): $($update.CveIDs -join ',')"
+        }
     }
 }
