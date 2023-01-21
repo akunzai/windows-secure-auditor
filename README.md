@@ -51,7 +51,7 @@ git pull
 Sample output
 
 ````markdown
-# Windows Secure Auditor: 0.12.9
+# Windows Secure Auditor: 0.13.0
 
 ## System Information
 
@@ -91,7 +91,8 @@ Sample output
 
 ## Network Time Sync
 
-- [x] Windows Time Service Started
+- [x] Windows Time service started
+- [x] NTP source: time.windows.com
 
 ```log
 Leap Indicator: 0(no warning)
