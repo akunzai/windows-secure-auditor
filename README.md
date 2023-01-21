@@ -89,7 +89,7 @@ Sample output
   - Size(Bytes): 128 => 129
   - Hash(SHA256): EDEAAFF3F1774AD2888673770C6D64097E391BC362D7D6FB34982DDF0EFD18CB => E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855
 
-## Network Time Sync
+## Network Time Protocol
 
 - [x] Windows Time service started
 - [x] NTP source: time.windows.com
