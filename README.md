@@ -92,7 +92,7 @@ Sample output
 ## Network Time Protocol
 
 - [x] Windows Time service started
-- [x] NTP source: time.windows.com
+- [x] NTP source: time.windows.com,0x8
 
 ```log
 Leap Indicator: 0(no warning)

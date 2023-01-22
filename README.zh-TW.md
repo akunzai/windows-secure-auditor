@@ -92,7 +92,7 @@ git pull
 ## 網路校時
 
 - [x] 網路校時服務已啟動
-- [x] 校時來源: time.windows.com
+- [x] 校時來源: time.windows.com,0x8
 
 ```log
 躍進式指示器: 0(沒有警告)
