@@ -15,6 +15,7 @@ if ($PSUICulture -ne 'en-US') {
 function Test($config) {
     # https://learn.microsoft.com/powershell/module/microsoft.powershell.management/get-psdrive
     $drives = Get-PSDrive -PSProvider FileSystem | Where-Object { $null -ne $_.Used -and $_.Used -gt 0 }
+    $exclude = $config.DiskSpace.Exclude
     if (-not [string]::IsNullOrWhiteSpace($exclude)) {
         $drives = $drives | Where-Object { $_.Name -inotmatch $exclude }
     }
@@ -22,7 +23,6 @@ function Test($config) {
         return
     }
     Write-Output "`n## $($i18n.DiskSpace)`n"
-    $exclude = $config.DiskSpace.Exclude
     $maxUsage = $config.DiskSpace.MaxUsage
     foreach ($drive in $drives) {
         $usage = [Math]::Round(($drive.Used / ($drive.Used + $drive.Free)) * 100, 2)
