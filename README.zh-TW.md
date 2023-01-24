@@ -51,7 +51,7 @@ git pull
 範例輸出
 
 ````markdown
-# Windows Secure Auditor: 0.13.1
+# Windows Secure Auditor: 0.13.2
 
 ## 系統資訊
 
