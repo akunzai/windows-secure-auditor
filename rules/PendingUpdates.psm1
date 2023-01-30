@@ -1,7 +1,6 @@
 ﻿$i18n = Data {
     # culture="en-US"
     ConvertFrom-StringData @'
-    CVE = CVE
     PendingUpdates = Pending Windows Update
     RebootRequired = Reboot required
 '@
@@ -26,13 +25,9 @@ function Test($config) {
     }
     Write-Output "`n## $($i18n.PendingUpdates)`n"
     foreach ($update in $result.updates) {
-        $pass = !($update.IsMandatory -and ($null -ne $update.MsrcSeverity -and $update.MsrcSeverity -eq 'Critical'))
-        Write-CheckList $pass $update.Title
+        Write-CheckList $false $update.Title
         if ($update.RebootRequired) {
             Write-Output "  - $($i18n.RebootRequired)"
-        }
-        if ($null -ne $update.CveIDs -and $update.CveIDs.Count -gt 0) {
-            Write-Output "  - $($i18n.CVE): $($update.CveIDs -join ',')"
         }
     }
 }
