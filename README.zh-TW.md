@@ -50,16 +50,19 @@ git pull
 範例輸出
 
 ````markdown
-# Windows Secure Auditor: 0.13.5
+# Windows Secure Auditor: 0.14.0
 
 ## 系統資訊
 
-- OSName: Microsoft Windows Server 2019 Datacenter
-- OsVersion: 10.0.17763
-- OsLocale: zh-TW
-- OsLocalDateTime: 01/04/2023 00:00:00
-- TimeZone: (UTC+08:00) Taipei
-- OsUpTime: 10.04:26:15.1008481
+- 主機名稱: DEMO
+- 時區: (UTC+08:00) Taipei
+- 時間: 2023-01-04T00:00:00
+- 文化特性: zh-TW
+- UI 文化特性: zh-TW
+- 作業系統: Microsoft Windows Server 2019 Datacenter - 10.0.17763
+- 系統運行時間: 240.00 小時 
+- PowerShell 版本: 7.3.2
+- .NET 執行環境版本: 7.0.2
 
 ## 防毒軟體
 
@@ -114,7 +117,7 @@ git pull
 
 ## 待安裝的 Windows 更新
 
-- [x] Security Intelligence Update for Microsoft Defender Antivirus - KB2267602 (Version 1.381.1969.0)
+- [ ] Security Intelligence Update for Microsoft Defender Antivirus - KB2267602 (Version 1.381.1969.0)
 
 ## 失敗的 HTTP 請求
 
