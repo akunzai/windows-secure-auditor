@@ -13,6 +13,11 @@ if ($PSUICulture -ne 'en-US') {
 }
 
 function Test($config) {
+    if (-not (Get-Command 'Get-PSDrive' -ErrorAction SilentlyContinue)) {
+        $ruleName = [System.IO.Path]::GetFileNameWithoutExtension($PSCommandPath)
+        Write-UnsupportedPlatform($ruleName)
+        return
+    }
     # https://learn.microsoft.com/powershell/module/microsoft.powershell.management/get-psdrive
     $drives = Get-PSDrive -PSProvider FileSystem | Where-Object { $null -ne $_.Used -and $_.Used -gt 0 }
     $exclude = $config.DiskSpace.Exclude

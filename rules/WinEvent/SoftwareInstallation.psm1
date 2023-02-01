@@ -11,7 +11,7 @@ if ($PSUICulture -ne 'en-US') {
 
 function Test($config) {
     $ruleName = [System.IO.Path]::GetFileNameWithoutExtension($PSCommandPath)
-    if ($PSVersionTable.PSEdition -eq 'Core' -and $PSVersionTable.Platform -ne 'Win32NT') {
+    if (-not (Get-Command 'Get-WinEvent' -ErrorAction SilentlyContinue)) {
         Write-UnsupportedPlatform($ruleName)
         return
     }
