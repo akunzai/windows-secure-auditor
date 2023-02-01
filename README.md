@@ -50,16 +50,19 @@ git pull
 Sample output
 
 ````markdown
-# Windows Secure Auditor: 0.13.5
+# Windows Secure Auditor: 0.14.0
 
 ## System Information
 
-- OSName: Microsoft Windows Server 2019 Datacenter
-- OsVersion: 10.0.17763
-- OsLocale: en-US
-- OsLocalDateTime: 01/04/2023 00:00:00
+- Hostname: DEMO
 - TimeZone: (UTC+08:00) Taipei
-- OsUpTime: 10.04:26:15.1008481
+- DateTime: 2023-01-04T00:00:00
+- Culture: en-US
+- UI Culture: en-US
+- OS: Microsoft Windows Server 2019 Datacenter - 10.0.17763
+- UpTime: 240.00 Hour(s)
+- PowerShell Version: 7.3.2
+- .NET CLR Version: 7.0.2
 
 ## Antivirus
 
@@ -114,7 +117,7 @@ Poll Interval: 6 (64s)
 
 ## Pending Windows Update
 
-- [x] Security Intelligence Update for Microsoft Defender Antivirus - KB2267602 (Version 1.381.1969.0)
+- [ ] Security Intelligence Update for Microsoft Defender Antivirus - KB2267602 (Version 1.381.1969.0)
 
 ## Failed HTTP Requests
 
