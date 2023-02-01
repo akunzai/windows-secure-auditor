@@ -9,7 +9,7 @@
 ## 環境需求
 
 - PowerShell >= 5.1
-- Windows Server 2012 R2 或更新版本
+- Windows Server 2016 或更新版本
 
 ## 功能特色
 

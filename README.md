@@ -9,7 +9,7 @@
 ## Requirements
 
 - PowerShell >= 5.1
-- Windows Server 2012 R2 or newer
+- Windows Server 2016 or newer
 
 ## Features
 
