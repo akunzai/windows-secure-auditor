@@ -47,7 +47,7 @@ Write-Output ("- $($i18n.DateTime): {0:yyyy-MM-dd'T'HH:mm:ss}" -f $now)
 Write-Output "- $($i18n.Culture): $($PSCulture)"
 Write-Output "- $($i18n.UICulture): $($PSUICulture)"
 
-if ($PSVersionTable.Platform -eq 'Win32NT') {
+if ($PSVersionTable.PSEdition -eq 'Desktop' -or $PSVersionTable.Platform -eq 'Win32NT') {
     # https://learn.microsoft.com/windows/win32/cimwin32prov/win32-operatingsystem
     $os = Get-CimInstance -ClassName Win32_OperatingSystem -ErrorAction SilentlyContinue
     Write-Output "- $($i18n.OS): $($os.Caption) - $($os.Version)"
