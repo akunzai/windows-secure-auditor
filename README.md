@@ -8,9 +8,8 @@
 
 ## Requirements
 
-- .NET Framework Runtime >= 4.5
 - PowerShell >= 5.1
-- Windows OS
+- Windows Server 2012 R2 or newer
 
 ## Features
 

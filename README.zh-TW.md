@@ -8,9 +8,8 @@
 
 ## 環境需求
 
-- .NET Framework Runtime >= 4.5
 - PowerShell >= 5.1
-- Windows 作業系統
+- Windows Server 2012 R2 或更新版本
 
 ## 功能特色
 
