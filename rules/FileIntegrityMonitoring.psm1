@@ -22,7 +22,7 @@ function Test($config) {
     if ([string]::IsNullOrWhiteSpace($config.FileIntegrityMonitoring.Paths)) {
         return
     }
-    $paths = $config.FileIntegrityMonitoring.Paths -split ',\s*'
+    $paths = $config.FileIntegrityMonitoring.Paths -split ',\s*' | Where-Object { -not [string]::IsNullOrWhiteSpace($_) }
     if ($paths.Count -eq 0) {
         return
     }
@@ -87,7 +87,7 @@ function Test($config) {
 }
 
 function Get-MonitoringFile($config) {
-    $monitoringPaths = $config.FileIntegrityMonitoring.Paths -split ',\s*'
+    $monitoringPaths = $config.FileIntegrityMonitoring.Paths -split ',\s*' | Where-Object { -not [string]::IsNullOrWhiteSpace($_) }
     $exclude = $config.FileIntegrityMonitoring.Exclude
     $hashAlgorithm = $config.FileIntegrityMonitoring.HashAlgorithm
     $items = [System.Collections.ArrayList]::new()
