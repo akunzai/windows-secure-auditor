@@ -62,7 +62,7 @@ if ([bool]$config.SystemInfo.Enabled) {
     Write-Output "- $($i18n.PowerShellVersion): $($PSVersionTable.PSVersion)"
     Write-Output "- $($i18n.ClrVersion): $([Environment]::Version)"
 
-    if ($PSVersionTable.PSEdition -eq 'Desktop') {
+    if (Get-Command 'Get-ComputerInfo' -ErrorAction SilentlyContinue) {
         $props = $config.SystemInfo.Properties -split ',\s*' | Where-Object { -not [string]::IsNullOrWhiteSpace($_) }
         if ($props.Count -gt 0) {
             $info = Get-ComputerInfo -Property $props
