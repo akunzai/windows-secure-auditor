@@ -25,7 +25,7 @@ function Test($config) {
         Write-RequireAdministrator($ruleName)
         return
     }
-    $logNames = $config.EventLogs.LogNames -split ',\s*'
+    $logNames = $config.EventLogs.LogNames -split ',\s*' | Where-Object { -not [string]::IsNullOrWhiteSpace($_) }
     $levels = $config.EventLogs.Levels -split ',\s*' | ForEach-Object { [int]$_ }
     $days = [int]$config.EventLogs.Days
     $exclude = $config.EventLogs.Exclude

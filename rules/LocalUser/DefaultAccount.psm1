@@ -18,7 +18,7 @@ function Test($config) {
         return
     }
     Write-Output "`n## $($i18n.DefaultAccount)`n"
-    $userNames = $config.DefaultAccount.LocalUserNames -split ',\s*'
+    $userNames = $config.DefaultAccount.LocalUserNames -split ',\s*' | Where-Object { -not [string]::IsNullOrWhiteSpace($_) }
     foreach ($userName in $userNames) {
         $localUser = Get-LocalUser $userName -ErrorAction SilentlyContinue
         if ($null -eq $localUser) {
