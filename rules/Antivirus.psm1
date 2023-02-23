@@ -29,7 +29,7 @@ function Test($config) {
         $product = Get-CimInstance -Namespace root/ESET -ClassName ESET_Product -ErrorAction SilentlyContinue
         if ($null -ne $product) {
             Write-CheckList $true "$($i18n.Installed): $($product.Name) $($product.Version)"
-            Write-CheckList ($product.StatusCode -eq 0) "$($i18n.UpdatedStatus): $($product.VirusDBLastUpdate) - $($product.VirusDBVersion)"
+            Write-CheckList (((Get-Date) - $product.VirusDBLastUpdate).TotalDays -le 7) ("$($i18n.UpdatedStatus): {0:yyyy-MM-dd'T'HH:mm:ssK} - $($product.VirusDBVersion)" -f $product.VirusDBLastUpdate)
             return
         }
         # The Microsoft Defender module was not found before Windows Server 2016
