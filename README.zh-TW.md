@@ -50,7 +50,7 @@ git pull
 範例輸出
 
 ````markdown
-# Windows Secure Auditor: 1.0.1
+# Windows Secure Auditor: 1.1.0
 
 ## 系統資訊
 
@@ -139,6 +139,7 @@ git pull
 ## 密碼逾期
 
 - [ ] WDeployAdmin: 密碼永不逾期
+- [ ] tom: 上次變更於 2022-06-03T21:10:00+08:00 > 90 天
 
 ## 事件記錄
 
