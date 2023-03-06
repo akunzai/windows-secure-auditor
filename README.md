@@ -50,7 +50,7 @@ git pull
 Sample output
 
 ````markdown
-# Windows Secure Auditor: 1.0.1
+# Windows Secure Auditor: 1.1.0
 
 ## System Information
 
@@ -139,6 +139,7 @@ Poll Interval: 6 (64s)
 ## Password Expires
 
 - [ ] WDeployAdmin: password never expires
+- [ ] tom: last set at 2022-06-03T21:10:00+08:00 > 90 days
 
 ## Event Logs
 
