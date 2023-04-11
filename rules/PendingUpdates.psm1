@@ -20,11 +20,16 @@ function Test($config) {
     $updateSession.ClientApplicationID = 'Windows Secure Auditor'
     $updateSearcher = $updateSession.CreateUpdateSearcher()
     $result = $updateSearcher.Search('IsHidden=0 and IsInstalled=0')
-    if ($result.updates.Count -eq 0) {
+    $exclude = $config.PendingUpdates.Exclude
+    $updates = $result.updates
+    if (-not [string]::IsNullOrWhiteSpace($exclude)) {
+        $updates = $updates | Where-Object { $_.KBArticleIDs -inotmatch $exclude }
+    }
+    if ($updates.Count -eq 0) {
         return;
     }
     Write-Output "`n## $($i18n.PendingUpdates)`n"
-    foreach ($update in $result.updates) {
+    foreach ($update in $updates) {
         Write-CheckList $false $update.Title
         if ($update.RebootRequired) {
             Write-Output "  - $($i18n.RebootRequired)"
