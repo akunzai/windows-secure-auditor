@@ -3,6 +3,7 @@
     ConvertFrom-StringData @'
     Antivirus = Antivirus
     FailedToDetectAntivirus = Failed to detect AntiVirus
+    FailedToCheckUpdateStatus = Failed to check update status
     Installed = Installed
     UpdatedStatus = Updated Status
 '@
@@ -32,6 +33,27 @@ function Test($config) {
             Write-CheckList (((Get-Date) - $product.VirusDBLastUpdate).TotalDays -le 7) ("$($i18n.UpdatedStatus): {0:yyyy-MM-dd'T'HH:mm:ssK} - $($product.VirusDBVersion)" -f $product.VirusDBLastUpdate)
             return
         }
+        # Trend Micro Deep Security Agent
+        # https://success.trendmicro.com/dcx/s/solution/1117040-checking-the-version-of-deep-security-agent-using-command-prompt
+        $products = Get-CimInstance -ClassName Win32_Product -Filter 'Name like "%Trend Micro%"' -ErrorAction SilentlyContinue
+        $dsaQuery = "$($env:ProgramFiles)\Trend Micro\Deep Security Agent\dsa_query.cmd"
+        if (Test-Path -Path $dsaQuery -ErrorAction SilentlyContinue -and $null -ne $products -and $products.Count -gt 0) {
+            $product = $products[0]
+            Write-CheckList $true "$($i18n.Installed): $($product.Name) $($product.Version)"
+            # https://help.deepsecurity.trendmicro.com/10/0/command-line-utilities.html#dsa_quer
+            $dsaStatus = (& $dsaQuery -c GetComponentInfo | Out-String).Trim()
+            $upToDate = -not [string]::IsNullOrWhiteSpace(($dsaStatus | Select-String "Component.AM.mode: on"))
+            $patternVersion = ($dsaStatus | Select-String 'Component.AM.version.pattern.VSAPI:')
+            if ([string]::IsNullOrWhiteSpace($patternVersion)) {
+                Write-CheckList $false "$($i18n.UpdatedStatus): $($i18n.FailedToCheckUpdateStatus)"
+            }
+            else {
+                $patternVersion = $patternVersion.Split(':')[1].Trim()
+                # https://success.trendmicro.com/dcx/s/solution/000288677
+                Write-CheckList $upToDate "$($i18n.UpdatedStatus): $($patternVersion)"
+            }
+            return
+        }
         # The Microsoft Defender module was not found before Windows Server 2016
         # https://www.powershellgallery.com/packages/WindowsDefender/
         if (Get-Command 'Get-MpComputerStatus' -ErrorAction SilentlyContinue) {
@@ -48,7 +70,7 @@ function Test($config) {
     $products = Get-CimInstance -Namespace root/SecurityCenter2 -ClassName AntivirusProduct -ErrorAction SilentlyContinue
     if ($null -eq $products -or $products.Count -eq 0) {
         Write-CheckList $false "$($i18n.Installed): $($i18n.FailedToDetectAntivirus)"
-        Write-CheckList $false "$($i18n.UpdatedStatus): $($i18n.FailedToDetectAntivirus)"
+        Write-CheckList $false "$($i18n.UpdatedStatus): $($i18n.FailedToCheckUpdateStatus)"
         return
     }
     $enabled = $products | Where-Object { ('0x{0:x}' -f $_.ProductState).SubString(3, 2) -notmatch '00|01' } | Sort-Object -Property timestamp -Descending
