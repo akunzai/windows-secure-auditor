@@ -26,6 +26,8 @@ function Test($config) {
     $osInfo = Get-CimInstance -ClassName Win32_OperatingSystem
     if ($osInfo.ProductType -ne 1) {
         # Windows Server
+
+        # ESET Endpoint Security
         # https://help.eset.com/efsw/9.0/en-US/work_wmi_provider_data.html
         $product = Get-CimInstance -Namespace root/ESET -ClassName ESET_Product -ErrorAction SilentlyContinue
         if ($null -ne $product) {
@@ -35,24 +37,26 @@ function Test($config) {
         }
         # Trend Micro Deep Security Agent
         # https://success.trendmicro.com/dcx/s/solution/1117040-checking-the-version-of-deep-security-agent-using-command-prompt
-        $products = Get-CimInstance -ClassName Win32_Product -Filter 'Name like "%Trend Micro%"' -ErrorAction SilentlyContinue
         $dsaQuery = "$($env:ProgramFiles)\Trend Micro\Deep Security Agent\dsa_query.cmd"
-        if (Test-Path -Path $dsaQuery -ErrorAction SilentlyContinue -and $null -ne $products -and $products.Count -gt 0) {
-            $product = $products[0]
-            Write-CheckList $true "$($i18n.Installed): $($product.Name) $($product.Version)"
-            # https://help.deepsecurity.trendmicro.com/10/0/command-line-utilities.html#dsa_quer
-            $dsaStatus = (& $dsaQuery -c GetComponentInfo | Out-String).Trim()
-            $upToDate = -not [string]::IsNullOrWhiteSpace(($dsaStatus | Select-String "Component.AM.mode: on"))
-            $patternVersion = ($dsaStatus | Select-String 'Component.AM.version.pattern.VSAPI:')
-            if ([string]::IsNullOrWhiteSpace($patternVersion)) {
-                Write-CheckList $false "$($i18n.UpdatedStatus): $($i18n.FailedToCheckUpdateStatus)"
+        if (Test-Path -Path $dsaQuery -ErrorAction SilentlyContinue) {
+            $products = Get-CimInstance -ClassName Win32_Product -Filter 'Name like "%Trend Micro%"' -ErrorAction SilentlyContinue
+            if ($null -ne $products -and $products.Count -gt 0) {
+                $product = $products[0]
+                Write-CheckList $true "$($i18n.Installed): $($product.Name) $($product.Version)"
+                # https://help.deepsecurity.trendmicro.com/10/0/command-line-utilities.html#dsa_quer
+                $dsaStatus = (& $dsaQuery -c GetComponentInfo | Out-String).Trim()
+                $upToDate = -not [string]::IsNullOrWhiteSpace(($dsaStatus | Select-String "Component.AM.mode: on"))
+                $patternVersion = ($dsaStatus | Select-String 'Component.AM.version.pattern.VSAPI:')
+                if ([string]::IsNullOrWhiteSpace($patternVersion)) {
+                    Write-CheckList $false "$($i18n.UpdatedStatus): $($i18n.FailedToCheckUpdateStatus)"
+                }
+                else {
+                    $patternVersion = $patternVersion.Split(':')[1].Trim()
+                    # https://success.trendmicro.com/dcx/s/solution/000288677
+                    Write-CheckList $upToDate "$($i18n.UpdatedStatus): $($patternVersion)"
+                }
+                return
             }
-            else {
-                $patternVersion = $patternVersion.Split(':')[1].Trim()
-                # https://success.trendmicro.com/dcx/s/solution/000288677
-                Write-CheckList $upToDate "$($i18n.UpdatedStatus): $($patternVersion)"
-            }
-            return
         }
         # The Microsoft Defender module was not found before Windows Server 2016
         # https://www.powershellgallery.com/packages/WindowsDefender/
