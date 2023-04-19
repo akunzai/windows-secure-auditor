@@ -61,7 +61,7 @@ if ([bool]$config.FileIntegrityMonitoring.Enabled) {
 if ($null -ne $attachmentPath -and (Test-Path -Path $attachmentPath -ErrorAction SilentlyContinue)) {
     $filename = [IO.Path]::GetFileName($attachmentPath)
     $zipPath = [IO.Path]::Combine([System.IO.Path]::GetTempPath(), ("{0}.zip" -f $filename))
-    Compress-Archive -LiteralPath $attachmentPath -DestinationPath $zipPath -CompressionLevel Optimal -Force
+    Compress-Archive -LiteralPath $attachmentPath -DestinationPath $zipPath -Force
     $parameters.Add('Attachments', $zipPath)
 }
 Send-MailMessage @parameters
