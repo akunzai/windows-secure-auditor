@@ -63,7 +63,7 @@ if ($UseSmtp) {
     if ($null -ne $attachmentPath -and (Test-Path -Path $attachmentPath -ErrorAction SilentlyContinue)) {
         $filename = [IO.Path]::GetFileName($attachmentPath)
         $zipPath = [IO.Path]::Combine([System.IO.Path]::GetTempPath(), ("{0}.zip" -f $filename))
-        Compress-Archive -LiteralPath $attachmentPath -DestinationPath $zipPath -CompressionLevel Optimal -Force
+        Compress-Archive -LiteralPath $attachmentPath -DestinationPath $zipPath -Force
         $parameters.Add('Attachments', $zipPath)
     }
     Send-MailMessage @parameters
@@ -99,7 +99,7 @@ if ($UseSandbox) {
 if ($null -ne $attachmentPath -and (Test-Path -Path $attachmentPath -ErrorAction SilentlyContinue)) {
     $filename = [IO.Path]::GetFileName($attachmentPath)
     $zipPath = ("{0}.zip" -f [System.IO.Path]::GetTempFileName())
-    Compress-Archive -LiteralPath $attachmentPath -DestinationPath $zipPath -CompressionLevel Optimal -Force
+    Compress-Archive -LiteralPath $attachmentPath -DestinationPath $zipPath -Force
     # https://github.com/PowerShell/PowerShell/issues/14537
     $bytes = if ($PSVersionTable.PSEdition -eq 'Core') {
         Get-Content -Path $zipPath -AsByteStream
