@@ -77,7 +77,7 @@ function Test($config) {
         Write-CheckList $false "$($i18n.UpdatedStatus): $($i18n.FailedToCheckUpdateStatus)"
         return
     }
-    $enabled = $products | Where-Object { ('0x{0:x}' -f $_.ProductState).SubString(3, 2) -notmatch '00|01' } | Sort-Object -Property timestamp -Descending
+    $enabled = $products | Where-Object { ('0x{0:x}' -f $_.ProductState).SubString(3, 2) -eq '10' } | Sort-Object -Property timestamp -Descending
     Write-CheckList ($enabled.Count -gt 0) "$($i18n.Installed): $($enabled[0].displayName)"
     if ($enabled.Count -gt 0) {
         $upToDate = $enabled | Where-Object { ('0x{0:x}' -f $_.ProductState).SubString(5) -eq '00' }
