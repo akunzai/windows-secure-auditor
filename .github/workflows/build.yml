@@ -1,4 +1,4 @@
-name: CI
+name: Build
 
 on:
   push:
@@ -14,7 +14,7 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
       - name: Install PSScriptAnalyzer module
         shell: pwsh
