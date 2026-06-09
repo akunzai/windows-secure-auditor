@@ -32,3 +32,10 @@ jobs:
           } else {
               Write-Output "There were $($errors.Count) errors and $($warnings.Count) warnings total."
           }
+      - name: Run Pester tests
+        shell: pwsh
+        run: |
+          $result = Invoke-Pester -Path tests/ -PassThru
+          if ($result.FailedCount -gt 0) {
+              throw "$($result.FailedCount) tests failed."
+          }
